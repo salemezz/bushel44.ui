@@ -1,0 +1,25 @@
+.App-logo {
+    /* animation: App-logo-spin infinite 10s linear; */
+    height: 100px;
+    width: auto;
+  }
+
+  .maintTitle {
+    color:  rgba(45, 112, 25, 0.836) !important;
+    /* -webkit-text-stroke-width: .5px;
+    -webkit-text-stroke-color: red; */
+  }
+
+.navbar {
+    margin: 0px;
+    background-color: rgba(83, 204, 46, 0.836) !important;
+}
+
+.title {
+  font-family: 'Cash Currency';
+}
+
+@font-face {
+  font-family: 'Cash Currency';
+  src: url('./Cash Currency.ttf')format('truetype');
+  }
