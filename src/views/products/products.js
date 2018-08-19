@@ -80,8 +80,12 @@ export default class Products extends Component {
                                                     <Title isSize={4}>{`${product.productName}`}</Title>
                                                     <Label>                                                                              
                                                         <p>User:  
+                                                           
                                                        <Link to={{
-                                                            pathname: '/users/' + product.creatorId
+                                                            pathname: '/users/' + product.creatorId,
+                                                            state: {
+                                                                profileUserID: product.creatorId
+                                                            }
                                                         }}>{product.postedBy}</Link></p>
                                                         <p>Quantity:{product.stock} </p>
                                                         <p>Details: {product.details} </p>

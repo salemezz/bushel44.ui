@@ -29,12 +29,14 @@ class App extends Component {
       <div className="App">
         <Navigation />
         <Section className='has-background-info'>
-          <Route exact path='/' component={Home}/>
+        {/* <Route path={"/"} component={() => <Home homeStuff={this.state.homeRelatedStuff} sharedStuff={this.state.sharedStuff}/>}/> */}
+
+          <Route exact path='/' component={Home}/>        
           <Route exact path='/products' component={Products}/>
           <Route exact path='/search' component={Search}/>
           <ProtectedRoute path='/protected' component={ProtectedView}/>
           {/* <ProtectedRoute path='/protected/edit' component={EditView}/> */}
-          <Route path='/users/:id' component={UnprotectedView}/>
+          <Route path='/users/:id' component={UnprotectedView} />
           <Route path='/login' component={Login}/>
           <Route path='/register' component={Register}/>
         </Section>

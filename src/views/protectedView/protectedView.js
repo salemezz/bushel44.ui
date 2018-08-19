@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom'
 import $ from 'jquery'
 
+
 class ProtectedView extends Component {
 
     // constructor(props) {
@@ -24,7 +25,6 @@ class ProtectedView extends Component {
     //   }
 
     // export default class UnprotectedView extends Component {
-  
     state = {
         productName: '',
         stock: '',
@@ -32,12 +32,13 @@ class ProtectedView extends Component {
         details: '',
         myProducts: [],
         is_active: false,
+        // productToBeEdited: {},
         creatorId: getUserData().id,
         postedBy: getUserData().username,
         thisUser: getUserData().id,
         selectedFile: null,
         hideNewProductForm: false,
-        selectedProduct: null,
+        selectedProduct: null,       
         notificationVisible: false,
         error: ''
     }
@@ -56,7 +57,7 @@ class ProtectedView extends Component {
         })
             .then((data) => {
                 this.state.myProducts = data
-                // console.log(this.state.myProducts)
+                console.log("prods" + this.state.myProducts)
                 this.setState({ ...this.state, loading: false })
                 this.setState({ ...this.state, hideResult: false })
             })
@@ -98,9 +99,10 @@ class ProtectedView extends Component {
     fileChangedHandler = (event) => {
         // this.setState({ selectedFile: event.target.files[0] })
     }
-    
 
-    onItemsSelect = (myProduct, e)=> {
+    onItemsSelect = (myProduct)=> {
+        this.state.selectedProduct = myProduct.id
+        console.log('sp ' + this.state.selectedProduct)
         // let x = myProduct.id
         // console.log(myProduct.id, 'sp');
         // // console.log('is' + JSON.stringify(myProduct.id)) 
@@ -134,7 +136,6 @@ class ProtectedView extends Component {
     }
 
     toggleModal = () => {
-        console.log('click')
         if (!this.state.is_active) {
         this.setState({ ...this.state, is_active: true })
         } else {
@@ -267,19 +268,14 @@ class ProtectedView extends Component {
                                                     <ModalCard>
                                                         <ModalCardHeader>
                                                             <ModalCardTitle>ModalCard Title</ModalCardTitle>
-                                                            <Delete />
+                                                            <Delete onClick={this.toggleModal} />
                                                         </ModalCardHeader>
-                                                        <ModalCardBody>
-                                                            <Columns>
-                                                            <Column>
-                                                               <EditView protectedState={this.state} />
-                                                            </Column>
-                                                            </Columns>
-                                                        </ModalCardBody>
-                                                        <ModalCardFooter>
-                                                            <Button isColor='success'>Save</Button>
-                                                            <Button onClick={this.toggleModal} isColor='warning'>Cancel</Button>
-                                                        </ModalCardFooter>
+                                                       
+                                               
+                                                               <EditView protectedState={this.state} handleEdit={this.handleEdit} toggleModal={this.toggleModal} />
+                                                      
+                                                    
+                                            
                                                     </ModalCard>
                                                 </Modal>
                                                 <Icon onClick={(e) => { this.onItemsSelect(myProduct); this.toggleModal(); }}  isSize='small' style={{ paddingRight: '15px', paddingLeft: '15px' }}>

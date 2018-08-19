@@ -9,7 +9,6 @@ import withRouter from '../../../node_modules/react-router-dom/withRouter';
 import $ from 'jquery'
 
 class UnprotectedView extends Component {
-
     // export default class UnprotectedView extends Component {
     state = {
         productName: '',
@@ -17,7 +16,7 @@ class UnprotectedView extends Component {
         username: null,
         email: null,
         businessName: null,
-        userID: null,
+        thisUser: null,
         stock: '',
         type: '',
         details: '',
@@ -58,12 +57,42 @@ class UnprotectedView extends Component {
     //     this.myReload()
     // }
     myReload = () => {
+        const { profileUserID } = this.props.location.state
+        // console.log('l ' + this.props.location.state)
+        console.log('v ' + profileUserID)
+        fetch('https://bushel44.herokuapp.com/api/users/' + profileUserID)
+            .then(response => response.json())
+            .then(data => {
+                console.log('data: ' + JSON.stringify(data));
+                console.log(this.state.userID);                
+                this.setState({
+                    ...this.state,
+                    userPageDatas: JSON.stringify(data)
+                    // username: data.username,
+                    // firstName: data.first_name,
+                    // lastName: data.last_name,
+                    // businessName: data.business_name,
+                    // email: data.email,
+                    // userID: profileUserID
+                })
+                console.log('ud ' + this.state.userPageDatas);   
+                // console.log(this.state.userPageDatas)
+                // console.log(this.state.products[0].creatorId)
+            })
+            .catch(err => {
+                this.setState({
+                    ...this.state,
+                    notificationVisible: false,
+                    error: err
+                })
+            })
+
         $.ajax({
             method: "POST",
             url: "https://bushel44.herokuapp.com/api/myProducts",
             data:
                 JSON.stringify({
-                    userID: this.state.userID
+                    thisUser: profileUserID
                 }),
             headers: {
                 'Content-Type': 'application/json'
@@ -71,7 +100,6 @@ class UnprotectedView extends Component {
         })
             .then((data) => {
                 this.state.userProducts = data
-                console.log("up" + this.state.userProducts)
                 this.setState({ ...this.state, loading: false })
                 this.setState({ ...this.state, hideResult: false })
             })
@@ -87,29 +115,9 @@ class UnprotectedView extends Component {
             })
     };
 
-    componentDidMount() {
-        fetch('https://bushel44.herokuapp.com/api/users/1')
-            .then(response => response.json())
-            .then(data => {
-                console.log('data: ' + JSON.stringify(data));
-                this.setState({
-                    ...this.state,
-                    username: data.username,
-                    firstName: data.first_name,
-                    lastName: data.last_name,
-                    businessName: data.business_name,
-                    email: data.email,
-                })
-                console.log(this.state.userPageDatas)
-                // console.log(this.state.products[0].creatorId)
-            })
-            .catch(err => {
-                this.setState({
-                    ...this.state,
-                    notificationVisible: false,
-                    error: err
-                })
-            })
+    componentDidMount() { 
+        // const { profileUserID } = this.props.location.state
+        // console.log('wtf ' + this.props.location.state)
         this.myReload()
     }
 
@@ -129,6 +137,7 @@ class UnprotectedView extends Component {
                             <Delete onClick={this.hideNotification} />
                         </Notification>
                         <Column isSize={6}>
+                        {this.state.userProducts.map((userProduct) => {
                             <Card>
                                 <CardContent>
                                     {/* {this.state.userPageDatas.map(userPageData => {
@@ -144,6 +153,7 @@ class UnprotectedView extends Component {
                                     </Label>
                                 </CardContent>
                             </Card>
+                                    })}
                         </Column>
 
                     </Columns>
