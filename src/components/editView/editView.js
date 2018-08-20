@@ -82,7 +82,7 @@ class EditView extends Component {
         $.ajax({
             method: "PUT",
             url: "https://bushel44.herokuapp.com/api/products/" + this.props.protectedState.selectedProduct,
-            data: {productName: JSON.stringify(this.state.productToBeEdited.productName)},
+            data: JSON.stringify({productName:this.state.productToBeEdited.productName}),
             headers: {
                 'Content-Type': 'application/json'
             }
