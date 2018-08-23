@@ -30,32 +30,7 @@ class UnprotectedView extends Component {
         notificationVisible: false,
         error: ''
     }
-    // myReload = () => {
-    //     $.ajax({
-    //         method: "GET",
-    //         url: "/api/user/1",
-    //     })
-    //         .then((data) => {
-    //             this.state.myProducts = data
-    //             console.log(this.state.myProducts)
-    //             this.setState({ ...this.state, loading: false })
-    //             this.setState({ ...this.state, hideResult: false })
-    //         })
-    //         .catch(err => {
-    //             console.log('fail1')
-    //             this.setState({
-    //                 ...this.state,
-    //                 loading: false,
-    //                 error: err.message,
-    //                 notificationVisible: true,
-    //                 hideResult: false
-    //             })
-    //         })
-    // };
 
-    // componentDidMount() {
-    //     this.myReload()
-    // }
     myReload = () => {
         const { profileUserID } = this.props.location.state
         // console.log('l ' + this.props.location.state)

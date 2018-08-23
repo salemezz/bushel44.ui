@@ -234,7 +234,7 @@ class ProtectedView extends Component {
                                         <Button onClick={this.uploadHandler}>Upload!</Button>
                                     </Field>
                                     <Button disabled={(this.state.productName === '' || this.state.quantity === '')} isColor='info' isOutlined onClick={this.handleSubmit}>Submit</Button>
-                                </CardContent>
+                                </CardContent>  
                             </Card>
                         </Column>
                         <Notification isColor='danger' isHidden={!this.state.notificationVisible}>
@@ -265,18 +265,14 @@ class ProtectedView extends Component {
 
                                                 <Modal isActive={this.state.is_active}>
                                                     <ModalBackground />
-                                                    <ModalCard>
-                                                        <ModalCardHeader>
-                                                            <ModalCardTitle>ModalCard Title</ModalCardTitle>
-                                                            <Delete onClick={this.toggleModal} />
-                                                        </ModalCardHeader>
-                                                       
+                                                 
+                                            
                                                
                                                                <EditView protectedState={this.state} handleEdit={this.handleEdit} toggleModal={this.toggleModal} />
                                                       
                                                     
                                             
-                                                    </ModalCard>
+                                                   
                                                 </Modal>
                                                 <Icon onClick={(e) => { this.onItemsSelect(myProduct); this.toggleModal(); }}  isSize='small' style={{ paddingRight: '15px', paddingLeft: '15px' }}>
                                                     <FontAwesomeIcon icon={['fa', 'edit']} />
