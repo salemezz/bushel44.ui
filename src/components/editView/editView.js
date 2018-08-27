@@ -24,7 +24,7 @@ class EditView extends Component {
         console.log('https://bushel44.herokuapp.com/api/products/' + this.props.protectedState.selectedProduct)
 
         fetch('https://bushel44.herokuapp.com/api/products/' + this.props.protectedState.selectedProduct)
-            .then(response => response.json())
+            //.then(response => response.json())
             .then(data => {
                 console.log('data: ' + JSON.stringify(data.productName))
                 this.setState({

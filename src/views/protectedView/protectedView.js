@@ -45,7 +45,7 @@ class ProtectedView extends Component {
 
     myReload = () => {
         $.ajax({
-            method: "POST",
+            method: "GET",
             url: "https://bushel44.herokuapp.com/api/myProducts",
             data:
                 JSON.stringify({
@@ -56,8 +56,8 @@ class ProtectedView extends Component {
             }
         })
             .then((data) => {
+                console.log(data);
                 this.state.myProducts = data
-                console.log("prods" + this.state.myProducts)
                 this.setState({ ...this.state, loading: false })
                 this.setState({ ...this.state, hideResult: false })
             })
@@ -97,7 +97,10 @@ class ProtectedView extends Component {
     }
 
     fileChangedHandler = (event) => {
-        // this.setState({ selectedFile: event.target.files[0] })
+        this.setState({ selectedFile: event.target.files[0] })
+    }
+
+    uploadHandler = event => {
     }
 
     onItemsSelect = (myProduct)=> {
@@ -143,29 +146,29 @@ class ProtectedView extends Component {
         }
     }
 
-    handleSubmit = () => {
-        console.log(this.state.hideNewProductForm)
-        console.log(this.state.postedBy)
+    handleSubmit = (event) => {
         this.setState({ ...this.state, loading: true })
-        $.ajax({
-            method: "POST",
-            url: "https://bushel44.herokuapp.com/api/products",
-            data:
-                JSON.stringify({
-                    productName: this.state.productName,
-                    stock: this.state.stock,
-                    type: this.state.type,
-                    details: this.state.details,
-                    creatorId: this.state.creatorId,
-                    postedBy: this.state.postedBy
-                }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(() => {
-                this.setState({ ...this.state, loading: false })
-                this.setState({ ...this.state, hideNewProductForm: true })
+        event.preventDefault();
+
+            const data = new FormData();
+            data.append('image', this.state.selectedFile);
+            data.append('productName', this.state.productName);
+            data.append('stock', this.state.stock);
+            data.append('type', this.state.type);
+            data.append('details', this.state.details);
+            data.append('creatorId', this.state.creatorId);
+            data.append('postedBy', this.state.postedBy);
+    
+            fetch('https://bushel44.herokuapp.com/api/products', {
+                method: 'POST',
+                body: data,
+            }).then(() => {
+                this.setState({ ...this.state,
+                    loading: false
+                })
+                this.setState({ ...this.state,
+                    hideNewProductForm: true
+                })
             })
             .catch(err => {
                 console.log('test')
@@ -175,7 +178,7 @@ class ProtectedView extends Component {
                     error: err.message,
                     notificationVisible: true
                 })
-            })
+            });
     }
 
     hideNotification = () => {
@@ -246,6 +249,7 @@ class ProtectedView extends Component {
                             <Card>
                                 <CardContent>
                                     {this.state.myProducts.map((myProduct) => {
+                                        console.log(myProduct)
                                         return (
                                             <Media key={myProduct.toString()}>
                                                 <MediaContent>
@@ -259,7 +263,7 @@ class ProtectedView extends Component {
                                                     </Label>
                                                 </MediaContent>
                                                 <MediaRight>
-                                                    <Image isSize='300x150' src='http://via.placeholder.com/350x150' />
+                                                    <Image isSize='300x150' src={myProduct.image} />
                                                 </MediaRight>
                                                 {/* <Link to='/protected/edit'> */}
 
