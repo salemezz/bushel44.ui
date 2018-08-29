@@ -4,9 +4,9 @@ import {
     MediaContent, Subtitle, Button, Columns,
     Column, Card, CardContent, Container, Notification, Delete
 } from 'bloomer';
-
+import { CloudinaryContext, Transformation, Image } from 'cloudinary-react';
 import withRouter from '../../../node_modules/react-router-dom/withRouter';
-import SearchResults from './searchResults';
+// import SearchResults from './searchResults';
 import $ from 'jquery'
 
 
@@ -22,18 +22,9 @@ class Search extends Component {
         hideResult: true
     }
 
-    // handleSearchChange = event => {
-    //     let searchTerm = event.target.value
-    //     this.setState({ ...this.state, clean: false, searchTerm: searchTerm })
-    //     console.log(this.state.searchTerm)
-    // }
-
     componentDidMount(){
         this.setState({ ...this.state, loading: true })
         this.setState({ ...this.state, hideResult: false })
-        //  console.log(this.state.searchTerm);
-        //  console.log(this.state.loading);
-        // console.log("hide result", this.state.hideResult);
 
         $.ajax({
             method: "POST",
@@ -47,10 +38,6 @@ class Search extends Component {
             }
         })
             .then((data) => {
-                // console.log('test1')
-                console.log(this.state.searchResults)
-                console.log(this.props.location.search.split("=")[1])
-                console.log(this.state.searchTerm)
                 this.state.searchResults = data
                 this.setState({ ...this.state, loading: false })
                 this.setState({ ...this.state, hideResult: false })
@@ -87,9 +74,6 @@ class Search extends Component {
     }
     
     render() {
-        console.log('term:' + this.state.searchTerm);
-        console.log('test');
-        console.log(this.props);
             return (
                 <Container>
                         <Box>
@@ -100,17 +84,25 @@ class Search extends Component {
                                 <Column isSize={8} isOffset={2}>
                                     <Card>
                                         <CardContent>
-                                            {this.state.searchResults.map(searchResult => {
-                                                return (
-                                                    <Media>
-                                                        <MediaContent>
-                                                            <Title isSize={4}>{`${searchResult.productName}`}</Title>
-                                                            <Subtitle isSize={6}><b>Details:</b> {searchResult.details}</Subtitle>
-                                                            <Subtitle isSize={6}><b>Quantity:</b> {searchResult.stock}</Subtitle>
-                                                        </MediaContent>
-                                                    </Media>
-                                                )
-                                            })}
+                                        {this.state.searchResults.map((searchResult) => {
+                                            console.log(searchResult)
+                                            return (
+                                                <Media>
+                                                    <MediaContent style={{ paddingLeft: "50px" }}>
+                                                        <Title isSize={4}>{`${searchResult.productName}`}</Title>
+                                                        <Image style={{ width: "auto" }} cloudName="dozenuld4" secure="true" publicId={searchResult.image} >
+                                                            {/* <Transformation width="300" height="100" crop="scale"/> */}
+                                                        </Image>
+                                                        <ul>
+                                                            <li><b>Quantity:</b> {searchResult.stock} </li>
+                                                            <li><b>Type:</b> {searchResult.type} </li>
+                                                            <li><b>Details:</b> {searchResult.details} </li>
+                                                        </ul>
+                                                    </MediaContent>
+                                                
+                                                </Media>
+                                            )
+                                        })}
                                         </CardContent>
                                     </Card>
                                 </Column>

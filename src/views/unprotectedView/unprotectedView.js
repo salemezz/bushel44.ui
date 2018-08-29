@@ -2,31 +2,24 @@ import React, { Component } from 'react';
 import {
     Notification, Delete, Container, CardHeaderTitle, CardContent, Select,
     CardHeader, Card, Columns, Column, Button, Field, Label, Control,
-    Icon, Input, Help, Title, Box, Media, MediaContent, Subtitle, MediaRight, Image,
+    Icon, Input, Help, Title, Box, Media, MediaContent, Subtitle, MediaRight,
 } from 'bloomer'
-// import { getUserData } from '../../libraries/authentication'
 import withRouter from '../../../node_modules/react-router-dom/withRouter';
+import { CloudinaryContext, Transformation, Image } from 'cloudinary-react';
 import $ from 'jquery'
 
 class UnprotectedView extends Component {
     // export default class UnprotectedView extends Component {
     state = {
         productName: '',
-        userPageDatas: [],
+        userPageData: [],
         username: null,
         email: null,
         businessName: null,
         thisUser: null,
-        stock: '',
-        type: '',
-        details: '',
         userProducts: [],
-        // creatorId: getUserData().id,
-        // postedBy: getUserData().username,
-        // thisUser: getUserData().id,
         selectedFile: null,
         hideNewProductForm: false,
-        selectedProduct: null,
         notificationVisible: false,
         error: ''
     }
@@ -42,17 +35,14 @@ class UnprotectedView extends Component {
                 console.log(this.state.userID);                
                 this.setState({
                     ...this.state,
-                    userPageDatas: JSON.stringify(data)
-                    // username: data.username,
-                    // firstName: data.first_name,
-                    // lastName: data.last_name,
-                    // businessName: data.business_name,
-                    // email: data.email,
-                    // userID: profileUserID
+                    // userPageData: JSON.stringify(data)
+                    username: data.username,
+                    firstName: data.first_name,
+                    lastName: data.last_name,
+                    businessName: data.business_name,
+                    email: data.email,
+                    userID: profileUserID
                 })
-                console.log('ud ' + this.state.userPageDatas);   
-                // console.log(this.state.userPageDatas)
-                // console.log(this.state.products[0].creatorId)
             })
             .catch(err => {
                 this.setState({
@@ -63,7 +53,7 @@ class UnprotectedView extends Component {
             })
 
         $.ajax({
-            method: "POST",
+            method: "GET",
             url: "https://bushel44.herokuapp.com/api/myProducts",
             data:
                 JSON.stringify({
@@ -91,8 +81,6 @@ class UnprotectedView extends Component {
     };
 
     componentDidMount() { 
-        // const { profileUserID } = this.props.location.state
-        // console.log('wtf ' + this.props.location.state)
         this.myReload()
     }
 
@@ -102,33 +90,23 @@ class UnprotectedView extends Component {
     }
 
     render() {
-        if (!this.state.hideNewProductForm) {
             return (
                 <Container>
                     <Columns isCentered>
-
                         <Notification isColor='danger' isHidden={!this.state.notificationVisible}>
                             {this.state.error}
                             <Delete onClick={this.hideNotification} />
                         </Notification>
-                        <Column isSize={6}>
-                        {this.state.userProducts.map((userProduct) => {
+                        <Column isSize={6}>    
                             <Card>
-                                <CardContent>
-                                    {/* {this.state.userPageDatas.map(userPageData => {
-                                        return (
-                                            <Media>
-                                                {/* key={thisUserPageData.toString()} */}
+                                <CardContent>                   
                                     <Title isSize={4}>{this.state.username}</Title>
                                     <Label>
-
-                                        {/* <li>Details: <a>{this.state.username}</h\   > </li> */}
-                                        <Subtitle isSize={6}><b>Email:</b> {this.state.email} <br />
+                                        <Subtitle isSize={6}><b>Email:</b> {this.state.email} <br/>
                                             <b>Business:</b> {this.state.businessName} </Subtitle>
                                     </Label>
                                 </CardContent>
                             </Card>
-                                    })}
                         </Column>
 
                     </Columns>
@@ -138,29 +116,24 @@ class UnprotectedView extends Component {
                         <Title isSize={6}>{this.state.username}'s Products</Title>
                             <Card>
                                 <CardContent>
-                                    {this.state.userProducts.map((userProduct) => {
-                                        return (
-                                            <Media key={userProduct.toString()}>
-                                                <MediaContent>
-                                                    <Title isSize={4}>{`${userProduct.productName}`}</Title>
-                                                    <Label>
+                                {this.state.userProducts.map((userProduct) => {
+                                            console.log(userProduct)
+                                            return (
+                                                <Media>
+                                                    <MediaContent style={{ paddingLeft: "50px" }}>
+                                                        <Title isSize={4}>{`${userProduct.productName}`}</Title>
+                                                        <Image style={{ width: "auto", minHeight: "200px" }} cloudName="dozenuld4" secure="true" publicId={userProduct.image} >
+                                                            {/* <Transformation width="300" height="100" crop="scale"/> */}
+                                                        </Image>
                                                         <ul>
-                                                            <li>Quantity:{userProduct.stock} </li>
-                                                            <li>Type: {userProduct.type} </li>
-                                                            <li>User: {userProduct.id} </li>
-                                                            <li>Details: {userProduct.details} </li>
+                                                            <li><b>Quantity:</b> {userProduct.stock} </li>
+                                                            <li><b>Type:</b> {userProduct.type} </li>
+                                                            <li><b>Details:</b> {userProduct.details} </li>
                                                         </ul>
-                                                    </Label>
-                                                </MediaContent>
-                                                <MediaRight>
-                                                    <Image isSize='300x150' src='http://via.placeholder.com/350x150' />
-                                                </MediaRight>
-
-                                                {/* <Delete  isLoading={this.state.loading} onClick={e => this.onItemsSelect(myProduct)}/> */}
-                                            </Media>
-                                        )
-                                    })}
-
+                                                    </MediaContent>                                             
+                                                </Media>
+                                            )
+                                        })}
                                 </CardContent>
                             </Card>
                         </Column>
@@ -168,15 +141,6 @@ class UnprotectedView extends Component {
                     </Columns>
                 </Container>
             )
-        } else {
-            return (
-                <Container>
-                    <Box>
-                        <Title>Product Posted!</Title>
-                    </Box>
-                </Container>
-            )
-        }
     }
 }
 

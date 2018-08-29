@@ -32,6 +32,7 @@ class Login extends Component{
         authenticate(this.state.username, this.state.password)
         .then(()=>{
             this.props.history.push('/')
+            window.location.reload()
         })
         .catch(err=>{
             this.setState({
@@ -79,7 +80,7 @@ class Login extends Component{
                                     </Control>
                                     <Help isHidden={this.state.password!=='' || this.state.clean} isColor='danger'>Invalid Password</Help>
                                 </Field>
-                                <Button isLoading={this.state.loading} disabled={(this.state.username==='' || this.state.password==='')} isColor='info' isOutlined onClick={this.handleSubmit}>Login</Button>
+                                <Button style={{float:'right'}} isLoading={this.state.loading} disabled={(this.state.username==='' || this.state.password==='')} isColor='info' isOutlined onClick={this.handleSubmit}>Login</Button>
                                 <Link to='/register'>Can't Login? Register Here!</Link>
                             </CardContent>
                         </Card>

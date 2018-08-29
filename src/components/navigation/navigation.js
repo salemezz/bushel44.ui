@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import SearchBox from '../searchBox/searchBox'
 import {
-    Navbar, Icon, NavbarEnd, NavbarBrand, NavbarItem, NavbarLink,
+    Navbar, NavbarEnd, NavbarBrand, NavbarItem,
     NavbarMenu, NavbarStart, NavbarBurger, Title,
-    NavbarDropdown, Button, Image, Label, Control, Input, FieldLabel
+    Button, Image,
 } from 'bloomer'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { getUserData, checkIfAuthenticated, deauthenticate } from '../../libraries/authentication'
@@ -38,7 +38,7 @@ class Navigation extends Component {
         let item = (
             <NavbarEnd>
                 <NavbarItem>
-                    <Button isColor='info' isOutlined>
+                    <Button isColor='info' className="login" isOutlined>
                         <Link to='/login'>
                             Login
                         </Link>
@@ -49,7 +49,11 @@ class Navigation extends Component {
         if (checkIfAuthenticated()) {
             item = (
                 <NavbarEnd>
-                    <NavbarItem>{this.state.userData.username}</NavbarItem>
+                    <NavbarItem>
+                        <Link to='/protected'>
+                            <Title hasTextAlign='centered' isSize={6}>{this.state.userData.username}</Title>
+                        </Link>
+                    </NavbarItem>
                     <NavbarItem>
                         <Button isColor='info' isOutlined onClick={this.handleLogOut}>Log Out</Button>
                     </NavbarItem>
@@ -57,9 +61,9 @@ class Navigation extends Component {
             )
         }
         return (
-            <Navbar style={{ height: '100px', margin: '0px', padding: '0px'  }}>
-                <NavbarBrand>
-                    <Image style={{ width: '200px', height: 'auto', margin: 20, marginLeft: 25 }} src={logo} />
+            <Navbar className="navbar" style={{ margin: '0px', padding: '0px' }}>
+                <NavbarBrand style={{ backgroundColor: 'rgba(83, 204, 46, 0.836)' }}>
+                            <Image style={{ width: '200px', height: 'auto', margin: 20, marginLeft: 25 }} src={logo} />
                     <NavbarItem>
                         <Link to='/'>
                             {
@@ -71,7 +75,7 @@ class Navigation extends Component {
                     </NavbarItem>
                     <NavbarBurger isActive={this.state.isActive} onClick={this.onClickNav} />
                 </NavbarBrand>
-                <NavbarMenu isActive={this.state.isActive} onClick={this.onClickNav}>
+                <NavbarMenu style={{ backgroundColor: 'rgba(83, 204, 46, 0.836)' }} isActive={this.state.isActive} >
                     <NavbarStart style={{ float: '15px' }}>
 
                         {/* <NavbarItem hasDropdown isHoverable>
@@ -104,11 +108,11 @@ class Navigation extends Component {
                                 {<Title className='mainTitle' hasTextAlign='centered' isSize={6}>Products</Title>}
                             </Link>
                         </NavbarItem>
-                        <NavbarItem>
-                            <Link to='/protected'>
-                                {<Title className='mainTitle' hasTextAlign='centered' isSize={6}>Account</Title>}
+                        {/* <NavbarItem>
+                            <Link to='/protected' onLoad={this.toggleNewModal}>
+                                {<Title className='mainTitle' hasTextAlign='centered' isSize={6}>Upload</Title>}
                             </Link>
-                        </NavbarItem>
+                        </NavbarItem> */}
                     </NavbarStart>
                     {item}
                 </NavbarMenu>

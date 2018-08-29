@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import {
     Notification, Delete, ModalCardHeader, ModalCardBody, ModalCardFooter, ModalCard, Select,
-    ModalCardTitle, Card, Columns, Column, Button, Field, Label, Control,
+    ModalCardTitle, TextArea, Columns, Column, Button, Field, Label, Control,
     Icon, Input, Help, Title, Box, Media, MediaContent, Subtitle, MediaRight, Image,
 } from 'bloomer'
 import $ from 'jquery'
@@ -15,6 +15,8 @@ class EditView extends Component {
             stock: '',
             type: '',
             details: '',
+            photoUploading: false,
+            selectedFile: null,
             productName: null,
             productStateLoaded: false
         }
@@ -37,12 +39,31 @@ class EditView extends Component {
             })
     }
 
-    handleEdit = () => {
-        console.log('state ' + JSON.stringify(this.state))
+    handlePhotoEdit = () => {
+        this.setState({ ...this.state, photoUploading: true })
+        const data = new FormData();
+        data.append('image', this.state.selectedFile);
+        fetch('https://bushel44.herokuapp.com/api/products/' + this.props.protectedState.selectedProduct + '/imageUpload', {
+            method: 'PUT',
+            body: data,
+        })
+            .then(() => {
+                this.setState({ ...this.state, photoUploading: false })
+            })
+            .catch(err => {
+                console.log('test')
+                this.setState({
+                    ...this.state,
+                    loading: false,
+                    error: err.message,
+                    notificationVisible: true
+                })
+            });
+    }
 
-        this.setState({ ...this.state, loading: true })
-
-        console.log('new ' + this.state.productName)
+    handleEdit = (event) => {
+        event.preventDefault();
+        this.props.loadingTrue()
         $.ajax({
             method: "PUT",
             url: "https://bushel44.herokuapp.com/api/products/" + this.props.protectedState.selectedProduct,
@@ -55,16 +76,15 @@ class EditView extends Component {
             headers: {
                 'Content-Type': 'application/json'
             }
+        }).then(() => {
+            this.props.loadingFalse()
+        }).then(() => {
+            window.location.reload()
         })
-            .then(() => {
-                this.setState({ ...this.state, loading: false })
-                this.setState({ ...this.state, hideNewProductForm: true })
-            })
             .catch(err => {
                 console.log('test')
                 this.setState({
                     ...this.state,
-                    loading: false,
                     error: err.message,
                     // notificationVisible: true
                 })
@@ -96,11 +116,16 @@ class EditView extends Component {
         console.log(this.state.details)
     }
 
+    fileChangedHandler = (event) => {
+        event.preventDefault();
+        this.setState({ selectedFile: event.target.files[0] })
+    }
+
     render() {
-        return (          
+        return (
             <ModalCard>
                 <ModalCardHeader>
-                    <ModalCardTitle>ModalCard Title</ModalCardTitle>
+                    <ModalCardTitle>Edit Product</ModalCardTitle>
                     <Delete onClick={this.props.toggleModal} />
                 </ModalCardHeader>
                 <ModalCardBody>
@@ -108,41 +133,38 @@ class EditView extends Component {
                     <Field>
                         <Label>Product Name</Label>
                         <Control hasIcons='left'>
-                            <Input isColor='info' placeholder={this.state.productName} onKeyUp={this.handleProductNameEdit.bind(this)} />
+                            <Input isColor='info' placeholder={this.state.productName} onKeyUp={this.handleProductNameEdit} />
                         </Control>
                         {/* <Help isHidden={this.state.productName !== '' || this.state.clean} isColor='danger'>Invalid Username</Help> */}
                     </Field>
                     <Field>
-                        <Label>Stock (lb)</Label>
+                        <Label>Stock</Label>
                         <Control hasIcons='left'>
-                            <Input isColor='info' placeholder={this.state.stock} onKeyUp={this.handleStockEdit.bind(this)} />
+                            <Input isColor='info' placeholder={this.state.stock} onKeyUp={this.handleStockEdit} />
+                            <p style={{fontSize: '9pt'}}>*Unit decided upon product type selection.</p>
                         </Control>
                         {/* <Help isHidden={this.state.quantity !== '' || this.state.clean} isColor='danger'>Invalid Password</Help> */}
                     </Field>
                     <Field>
                         <Label>Product Type</Label>
-                        {/* <Control hasIcons='left'>
-                                            <Input isColor='info' placeholder='Type' onKeyUp={this.handleTypeChange} />
-                                        </Control> */}
-                        <Control onChange={this.handleTypeEdit.bind(this)}>
+                        <Control onChange={this.handleTypeEdit}>
                             <Select>
                                 <option>Select Product Type...</option>
-                                <option>Flower</option>
-                                <option>Oil</option>
-                                <option>Editable</option>
-                                {/* <input type='submit' onChange={this.handleTypeChange}/> */}
+                                <option>Flower (lb) </option>
+                                <option>Oil (pc.)</option>
+                                <option>Editable (pc.)</option>
                             </Select>
                         </Control>
                     </Field>
                     <Field>
                         <Label>Details</Label>
                         <Control hasIcons='left'>
-                            <Input isColor='info' placeholder={this.state.details} onKeyUp={this.handleDetailsEdit.bind(this)} />
+                            <TextArea isColor='info' placeholder={this.state.details} onKeyUp={this.handleDetailsEdit} />
                         </Control>
                     </Field>
                     <Field>
                         <Input type="file" onChange={this.fileChangedHandler} />
-                        <Button onClick={this.uploadHandler}>Upload!</Button>
+                        <Button style={{ marginTop: '10px' }} isLoading={this.state.photoUploading} onClick={this.handlePhotoEdit}>Upload!</Button>
                     </Field>
                     <Notification isColor='danger' isHidden={!this.state.notificationVisible}>
                         {this.state.error}
@@ -150,8 +172,7 @@ class EditView extends Component {
                     </Notification>
                 </ModalCardBody>
                 <ModalCardFooter>
-                    <Button onClick={() => { this.handleEdit(); this.props.toggleModal(); }} isColor='success'>Save</Button>
-                    {/* <Button onClick={this.props.toggleModal} isColor='warning'>Cancel</Button> */}
+                    <Button onClick={(event) => { this.handleEdit(event); this.props.toggleModal(); }} isColor='success'>Save</Button>
                 </ModalCardFooter>
             </ModalCard>
         )

@@ -12,8 +12,10 @@
 
 .navbar {
     margin: 0px;
-    background-color: rgba(83, 204, 46, 0.836) !important;
+    /* background-color: rgba(83, 204, 46, 0.836) !important; */
 }
+
+
 
 .title {
   font-family: 'Cash Currency';

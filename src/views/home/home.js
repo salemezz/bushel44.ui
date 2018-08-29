@@ -4,17 +4,12 @@ import { Box, Title, Columns, Column, Section, Image, Container, Subtitle } from
 import './home.css'
 import Background from '../../images/bushel44_homepage.png';
 
-// var homeStyle = {
-//     width: "100%",
-//     height: 'auto',
-//     backgroundImage: `url(${Background})`
-//   };
 
 export default class Home extends Component {
     render() {
         return (
                 <Container>
-                         <Image style={{ width: '1050px', height: 'auto', margin: 'auto' }} src={Background} />
+                         <Image style={{ width: 'auto', height: 'auto', margin: 'auto' }} src={Background} />
                     <Box>
                         <Columns>
                             <Column isSize={8} isOffset={2}>

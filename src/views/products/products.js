@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import {
-    Box, Title, CardHeader, Media, MediaLeft, Label, MediaRight,
-    MediaContent, Subtitle, CardHeaderTitle, Columns, Image,
+    Box, Title, Modal, Media, ModalBackground, Icon, FontAwesomeIcon,
+    MediaContent, Subtitle, CardHeaderTitle, Columns,
     Column, Card, CardContent, Container, Notification, Delete, Control
 } from 'bloomer';
 import { Link, withRouter } from 'react-router-dom'
 import { getUserData } from '../../libraries/authentication'
+import { CloudinaryContext, Transformation, Image } from 'cloudinary-react';
 
 
 
@@ -66,35 +67,32 @@ export default class Products extends Component {
                 </Box>
                 <Box>
                     <Columns>
-                        <Column isSize={8} isOffset={2}>
+                        <Column isSize={6} isOffset={3}>
                             <Card>
                                 <CardContent>
                                     {this.state.products.map((product) => {
                                         return (
-                                            <Media key={product.toString()}>
-
-                                                {/* <MediaLeft>
-                                                    <Image isSize='48x48' src='https://via.placeholder.com/96x96' />
-                                                </MediaLeft> */}
-                                                <MediaContent>
-                                                    <Title isSize={4}>{`${product.productName}`}</Title>
-                                                    <Label>                                                                              
-                                                        <p>User:  
-                                                           
-                                                       <Link to={{
-                                                            pathname: '/users/' + product.creatorId,
-                                                            state: {
-                                                                profileUserID: product.creatorId
-                                                            }
-                                                        }}>{product.postedBy}</Link></p>
-                                                        <p>Quantity:{product.stock} </p>
-                                                        <p>Details: {product.details} </p>
-                                                    </Label>
-                                                </MediaContent>
-                                                <MediaRight>
-                                                    <Image isSize='300x150' src='http://via.placeholder.com/350x150' />
-                                                </MediaRight>
-                                            </Media>
+                                            <Media>
+                                                    <MediaContent>
+                                                        <Title isSize={4}>{`${product.productName}`}</Title>
+                                                        <Image style={{ width: "auto", maxHeight: "auto" }} cloudName="dozenuld4" secure="true" publicId={product.image} >
+                                                            {/* <Transformation width="300" height="100" crop="scale"/> */}
+                                                        </Image>                                                      
+                                                            <ul>
+                                                                <li><b>Quantity:</b> {product.stock} </li>
+                                                                <li><b>Type:</b> {product.type} </li>
+                                                                <li><b>Details:</b> {product.details} </li>
+                                                                <li><b>User: </b>  
+                                                           <Link to={{
+                                                                pathname: '/users/' + product.creatorId,
+                                                                state: {
+                                                                    profileUserID: product.creatorId
+                                                                }
+                                                            }}>{product.postedBy}</Link></li>
+                                                            </ul>                                                     
+                                                    </MediaContent>
+                               
+                                                </Media>
                                         )
                                     })}
                                 </CardContent>
