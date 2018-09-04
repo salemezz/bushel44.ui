@@ -63,19 +63,19 @@ class Navigation extends Component {
         return (
             <Navbar className="navbar" style={{ margin: '0px', padding: '0px' }}>
                 <NavbarBrand style={{ backgroundColor: 'rgba(83, 204, 46, 0.836)' }}>
-                            <Image style={{ width: '200px', height: 'auto', margin: 20, marginLeft: 25 }} src={logo} />
+                            <Image style={{ width: '150px', height: 'auto', margin: 20, marginLeft: 25 }} src={logo} />
                     <NavbarItem>
                         <Link to='/'>
                             {
                                 <NavbarItem className='title'>
-                                    <Title className='mainTitle' hasTextAlign='centered' isSize={3}>Bushel 44</Title>
+                                    <Title className='mainTitle' hasTextAlign='centered' isSize={5}>Bushel 44</Title>
                                 </NavbarItem>
                             }
                         </Link>
                     </NavbarItem>
                     <NavbarBurger isActive={this.state.isActive} onClick={this.onClickNav} />
                 </NavbarBrand>
-                <NavbarMenu style={{ backgroundColor: 'rgba(83, 204, 46, 0.836)' }} isActive={this.state.isActive} >
+                <NavbarMenu onClick={this.onClickNav} style={{ backgroundColor: 'rgba(83, 204, 46, 0.836)' }} isActive={this.state.isActive} >
                     <NavbarStart style={{ float: '15px' }}>
 
                         {/* <NavbarItem hasDropdown isHoverable>
