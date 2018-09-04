@@ -75,7 +75,7 @@ class Navigation extends Component {
                     </NavbarItem>
                     <NavbarBurger isActive={this.state.isActive} onClick={this.onClickNav} />
                 </NavbarBrand>
-                <NavbarMenu onClick={this.onClickNav} style={{ backgroundColor: 'rgba(83, 204, 46, 0.836)' }} isActive={this.state.isActive} >
+                <NavbarMenu style={{ backgroundColor: 'rgba(83, 204, 46, 0.836)' }} isActive={this.state.isActive} >
                     <NavbarStart style={{ float: '15px' }}>
 
                         {/* <NavbarItem hasDropdown isHoverable>
