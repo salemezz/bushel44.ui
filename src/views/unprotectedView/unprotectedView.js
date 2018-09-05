@@ -53,7 +53,7 @@ class UnprotectedView extends Component {
             })
 
         $.ajax({
-            method: "GET",
+            method: "POST",
             url: "https://bushel44.herokuapp.com/api/myProducts",
             data:
                 JSON.stringify({
@@ -120,7 +120,7 @@ class UnprotectedView extends Component {
                                             console.log(userProduct)
                                             return (
                                                 <Media>
-                                                    <MediaContent style={{ paddingLeft: "50px" }}>
+                                                    <MediaContent>
                                                         <Title isSize={4}>{`${userProduct.productName}`}</Title>
                                                         <Image style={{ width: "auto", minHeight: "200px" }} cloudName="dozenuld4" secure="true" publicId={userProduct.image} >
                                                             {/* <Transformation width="300" height="100" crop="scale"/> */}
