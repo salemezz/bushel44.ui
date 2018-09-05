@@ -30,9 +30,6 @@ class ProtectedView extends Component {
         myProducts: [],
         is_active: false,
         is_active1: false,
-        // productToBeEdited: {},
-        creatorId: getUserData().id,
-        postedBy: getUserData().username,
         thisUser: getUserData().id,
         selectedFile: null,
         hideNewProductForm: false,
@@ -42,9 +39,10 @@ class ProtectedView extends Component {
     }
 
     myReload = () => {
+        console.log(this.state.thisUser)
         this.setState({ ...this.state, loading: true })
         $.ajax({
-            method: "GET",
+            method: "POST",
             url: "https://bushel44.herokuapp.com/api/myProducts",
             data:
                 JSON.stringify({
@@ -55,7 +53,7 @@ class ProtectedView extends Component {
             }
         })
             .then((data) => {
-                console.log(data);
+                console.log('my prods ' + JSON.stringify(data));
                 this.state.myProducts = data
                 this.setState({ ...this.state, loading: false })
                 this.setState({ ...this.state, hideResult: false })
@@ -79,6 +77,7 @@ class ProtectedView extends Component {
     loadingTrue = () => {
         this.setState({ ...this.state, loading: true })
     }
+
     loadingFalse = () => {
         this.setState({ ...this.state, loading: false })
     }
@@ -121,11 +120,13 @@ class ProtectedView extends Component {
             this.setState({ ...this.state, is_active: false })
         }
     }
+
     toggleNewModal = () => {
         if (!this.state.is_active1) {
             this.setState({ ...this.state, is_active1: true })
         } else {
             this.setState({ ...this.state, is_active1: false })
+            
         }
     }
 

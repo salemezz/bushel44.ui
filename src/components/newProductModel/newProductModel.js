@@ -5,9 +5,14 @@ import {
     ModalCardTitle, TextArea, Columns, Column, Button, Field, Label, Control,
     Icon, Input, Help, Title, Box, Media, MediaContent, Subtitle, MediaRight, Image,
 } from 'bloomer'
+import { getUserData } from '../../libraries/authentication'
 import $ from 'jquery'
 
 class newProductModel extends Component {
+    state= {
+        creatorId: getUserData().id,
+        postedBy: getUserData().username
+    }
 
 handleProductNameChange = event => {
     event.preventDefault();
@@ -40,21 +45,20 @@ fileChangedHandler = (event) => {
 
 componentDidMount() {
     console.log('props' + this.props.loading)
+    console.log('id ' + this.state.creatorId)
 }
 
 
 handleSubmit = (event) => {
-    this.props.loadingTrue()
     event.preventDefault();
-
     const data = new FormData();
     data.append('image', this.state.selectedFile);
     data.append('productName', this.state.productName);
     data.append('stock', this.state.stock);
     data.append('type', this.state.type);
     data.append('details', this.state.details);
-    data.append('creatorId', this.props.creatorId);
-    data.append('postedBy', this.props.postedBy);
+    data.append('creatorId', this.state.creatorId);
+    data.append('postedBy', this.state.postedBy);
 
     fetch('https://bushel44.herokuapp.com/api/products', {
         method: 'POST',
@@ -121,7 +125,7 @@ render() {
                 </Field>
             </ModalCardBody>
             <ModalCardFooter>
-                <Button onClick={(event) => { this.handleSubmit(event); this.props.toggleNewModal(); }} isColor='success'>Submit</Button>
+                <Button onClick={(event) => { this.handleSubmit(event); this.props.toggleNewModal(); this.props.loadingTrue();}} isColor='success'>Submit</Button>
             </ModalCardFooter>
         </ModalCard>
     )
