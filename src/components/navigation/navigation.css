@@ -1,12 +1,5 @@
-.App-logo {
-    /* animation: App-logo-spin infinite 10s linear; */
-    max-height: 100px;
-    width: auto;
-    z-index: 1;
-  }
 
-
-.navbar {
+.navbar-brand {
     /* background-color: rgba(83, 204, 46, 0.836) !important; */
 }
 

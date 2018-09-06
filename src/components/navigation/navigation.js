@@ -63,7 +63,7 @@ class Navigation extends Component {
         return (
             <Navbar className="navbar" style={{ margin: '0px', padding: '0px' }}>
                 <NavbarBrand style={{ backgroundColor: 'rgba(83, 204, 46, 0.836)' }}>
-                            <Image style={{ width: '150px', height: 'auto', margin: 20, marginLeft: 25 }} src={logo} />
+                            <Image style={{ width: '180px', height: 'auto', margin: 20, marginLeft: 25 }} src={logo} />
                     <NavbarItem>
                         <Link to='/'>
                             {

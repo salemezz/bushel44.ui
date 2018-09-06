@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {
     Box, Title, Modal, Media, ModalBackground, ModalContent, ModalClose,
-    MediaContent, Columns, Column, Card, CardContent, Container, 
+    MediaContent, Columns, Column, Card, CardContent, Container,
 } from 'bloomer';
 import { Link, withRouter } from 'react-router-dom'
 import { getUserData } from '../../libraries/authentication'
@@ -67,55 +67,57 @@ export default class Products extends Component {
     hideNotification = () => {
         this.setState({ ...this.state, notificationVisible: false })
     }
+    
     render() {
         return (
             <Container>
-                <Box>
-                    <Title>Products</Title>
-                </Box>
-                <Box>
-                    <Columns>
-                        <Column isSize={6} isOffset={3}>
-                            <Card>
-                                <CardContent>
-                                    {this.state.products.map((product) => {
-                                        return (
-                                            <Media>
-                                                <MediaContent>
-                                                    <Title isSize={4}>{`${product.productName}`}</Title>
+                <Title style={{ textAlign: 'center' }}>Products</Title>
+                <Columns>
+                    <Column isSize={6} isOffset={3}>
+                        <Card>
+                            <CardContent>
+                                {this.state.products.map((product) => {
+                                    console.log('image ' + product.productName)
+                                    return (
+                                        <Media>
+                                            <MediaContent>
+                                                <CloudinaryContext>
+                                                    <Title isSize={4}>{`${product.productName}`}</Title>            
                                                     <Image onClick={this.toggleModal} style={{ width: "auto", maxHeight: "auto" }} cloudName="dozenuld4" secure="true" publicId={product.image}>
                                                     </Image>
-                                                    <Modal isActive={this.state.is_active}>
+                                                    {/* <Modal isActive={this.state.is_active}>
                                                         <ModalBackground />
                                                         <ModalContent>
                                                             <Image style={{ width: "auto", maxHeight: "auto" }} cloudName="dozenuld4" secure="true" publicId={product.image}>
                                                             </Image>
                                                         </ModalContent>
-                                                            <ModalClose onClick={this.toggleModal} />
-                                                    </Modal>
-                                                        <ul>
-                                                            <li><b>Quantity:</b> {product.stock} </li>
-                                                            <li><b>Type:</b> {product.type} </li>
-                                                            <li><b>Details:</b> {product.details} </li>
-                                                            <li><b>User: </b>
-                                                                <Link to={{
-                                                                    pathname: '/users/' + product.creatorId,
-                                                                    state: {
-                                                                        profileUserID: product.creatorId
-                                                                    }
-                                                                }}>{product.postedBy}</Link></li>
-                                                        </ul>
-                                                </MediaContent>
+                                                        <ModalClose onClick={this.toggleModal} />
+                                                    </Modal> */}
 
-                                            </Media>
-                                                )
-                                            })}
-                                </CardContent>
-                            </Card>
-                        </Column>
-                    </Columns>
-                </Box>
+                                                    <ul>
+                                                        <li><b>Quantity:</b> {product.stock} </li>
+                                                        <li><b>Type:</b> {product.type} </li>
+                                                        <li><b>Details:</b> {product.details} </li>
+                                                        <li><b>User: </b>
+                                                            <Link to={{
+                                                                pathname: '/users/' + product.creatorId,
+                                                                state: {
+                                                                    profileUserID: product.creatorId
+                                                                }
+                                                            }}>{product.postedBy}</Link></li>
+                                                    </ul>
+
+                                                </CloudinaryContext>
+                                            </MediaContent>
+                                        </Media>
+                                    )
+                                })}
+
+                            </CardContent>
+                        </Card>
+                    </Column>
+                </Columns>
             </Container>
-                    )
-                }
+        )
+    }
 }
