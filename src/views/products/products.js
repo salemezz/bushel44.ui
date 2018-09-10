@@ -17,6 +17,8 @@ export default class Products extends Component {
         error: ''
     }
 
+
+
     componentDidMount() {
         fetch('https://bushel44.herokuapp.com/api/products')
             .then(response => response.json())
@@ -71,7 +73,7 @@ export default class Products extends Component {
     render() {
         return (
             <Container>
-                <Title style={{ textAlign: 'center' }}>Products</Title>
+                <Title style={{ textAlign: 'center', fontSize: 'calc(20px + 2vw)'  }}>Products</Title>
                 <Columns>
                     <Column isSize={6} isOffset={3}>
                         <Card>
@@ -82,7 +84,7 @@ export default class Products extends Component {
                                         <Media>
                                             <MediaContent>
                                                 <CloudinaryContext>
-                                                    <Title isSize={4}>{`${product.productName}`}</Title>            
+                                                    <Title style={{ textAlign: 'center', fontSize: 'calc(8px + 2vw)' }}>{`${product.productName}`}</Title>            
                                                     <Image onClick={this.toggleModal} style={{ width: "auto", maxHeight: "auto" }} cloudName="dozenuld4" secure="true" publicId={product.image}>
                                                     </Image>
                                                     {/* <Modal isActive={this.state.is_active}>

@@ -76,10 +76,7 @@ class Search extends Component {
     render() {
             return (
                 <Container>
-                        <Box>
-                            <Title>Results</Title>
-                        </Box>
-                        <Box>
+                        <Title style={{ textAlign: 'center', fontSize: 'calc(20px + 2vw)'  }}>Results</Title>
                             <Columns>
                                 <Column isSize={8} isOffset={2}>
                                     <Card>
@@ -88,8 +85,8 @@ class Search extends Component {
                                             console.log(searchResult)
                                             return (
                                                 <Media>
-                                                    <MediaContent style={{ paddingLeft: "50px" }}>
-                                                        <Title isSize={4}>{`${searchResult.productName}`}</Title>
+                                                    <MediaContent>
+                                                        <Title style={{ textAlign: 'center', fontSize: 'calc(8px + 2vw)' }}>{`${searchResult.productName}`}</Title>
                                                         <Image style={{ width: "auto" }} cloudName="dozenuld4" secure="true" publicId={searchResult.image} >
                                                             {/* <Transformation width="300" height="100" crop="scale"/> */}
                                                         </Image>
@@ -107,7 +104,6 @@ class Search extends Component {
                                     </Card>
                                 </Column>
                             </Columns>
-                        </Box>
                     </Container>
             )
         }
