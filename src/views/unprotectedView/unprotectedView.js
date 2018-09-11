@@ -7,6 +7,7 @@ import {
 import withRouter from '../../../node_modules/react-router-dom/withRouter';
 import { CloudinaryContext, Transformation, Image } from 'cloudinary-react';
 import $ from 'jquery'
+import { Link } from 'react-router-dom'
 
 class UnprotectedView extends Component {
     // export default class UnprotectedView extends Component {
@@ -117,23 +118,39 @@ class UnprotectedView extends Component {
                             <Card>
                                 <CardContent>
                                 {this.state.userProducts.map((userProduct) => {
-                                            console.log(userProduct)
-                                            return (
-                                                <Media>
-                                                    <MediaContent>
-                                                        <Title isSize={4}>{`${userProduct.productName}`}</Title>
-                                                        <Image style={{ width: "auto", minHeight: "200px" }} cloudName="dozenuld4" secure="true" publicId={userProduct.image} >
-                                                            {/* <Transformation width="300" height="100" crop="scale"/> */}
-                                                        </Image>
-                                                        <ul>
-                                                            <li><b>Quantity:</b> {userProduct.stock} </li>
-                                                            <li><b>Type:</b> {userProduct.type} </li>
-                                                            <li><b>Details:</b> {userProduct.details} </li>
-                                                        </ul>
-                                                    </MediaContent>                                             
-                                                </Media>
-                                            )
-                                        })}
+                                    console.log('image ' + userProduct.productName)
+                                    return (
+                                        <Media>
+                                            <MediaContent>
+                                                <CloudinaryContext>
+                                                    <Title style={{ textAlign: 'center', fontSize: 'calc(8px + 2vw)' }}>{`${userProduct.productName}`}</Title>            
+                                                    <Image onClick={this.toggleModal} style={{ width: "auto", maxHeight: "auto" }} cloudName="dozenuld4" secure="true" publicId={userProduct.image}>
+                                                    </Image>
+                                                    {/* <Modal isActive={this.state.is_active}>
+                                                        <ModalBackground />
+                                                        <ModalContent>
+                                                            <Image style={{ width: "auto", maxHeight: "auto" }} cloudName="dozenuld4" secure="true" publicId={product.image}>
+                                                            </Image>
+                                                        </ModalContent>
+                                                        <ModalClose onClick={this.toggleModal} />
+                                                    </Modal> */}
+                                                    <ul>
+                                                        <li><b>Quantity:</b> {userProduct.stock} </li>
+                                                        <li><b>Type:</b> {userProduct.type} </li>
+                                                        <li><b>User: </b>
+                                                            <Link to={{
+                                                                pathname: '/users/' + userProduct.creatorId,
+                                                                state: {
+                                                                    profileUserID: userProduct.creatorId
+                                                                }
+                                                            }}>{userProduct.postedBy}</Link></li>
+                                                        <li><b>Details:</b> {userProduct.details} </li>                                     
+                                                    </ul>
+                                                </CloudinaryContext>
+                                            </MediaContent>
+                                        </Media>
+                                    )
+                                })}
                                 </CardContent>
                             </Card>
                         </Column>
