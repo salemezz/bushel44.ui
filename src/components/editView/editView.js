@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
-import { Link, withRouter } from 'react-router-dom'
 import {
     Notification, Delete, ModalCardHeader, ModalCardBody, ModalCardFooter, ModalCard, Select,
-    ModalCardTitle, TextArea, Columns, Column, Button, Field, Label, Control,
-    Icon, Input, Help, Title, Box, Media, MediaContent, Subtitle, MediaRight, Image,
+    ModalCardTitle, TextArea, Button, Field, Label, Control, Input,
 } from 'bloomer'
 import $ from 'jquery'
 

@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
-import { Link, withRouter } from 'react-router-dom'
 import {
-    Notification, Delete, ModalCardHeader, ModalCardBody, Container, ModalCardFooter, ModalCard, Select,
-    ModalCardTitle, TextArea, Columns, Column, Button, Field, Label, Control,
-    Icon, Input, Help, Title, Box, Media, MediaContent, Subtitle, MediaRight, Image,
+    Delete, ModalCardHeader, ModalCardBody, ModalCardFooter, ModalCard, Select,
+    ModalCardTitle, TextArea, Button, Field, Label, Control, Input,
 } from 'bloomer'
 import { getUserData } from '../../libraries/authentication'
 import $ from 'jquery'
@@ -125,7 +123,7 @@ render() {
                 </Field>
             </ModalCardBody>
             <ModalCardFooter>
-                <Button style={{ float: 'right', }} isLoading={this.props.loading} onClick={(event) => { this.handleSubmit(event); this.props.toggleNewModal(); this.props.loadingTrue();}} isColor='success'>Submit</Button>
+                <Button style={{ float: 'right' }} isLoading={this.props.loading} onClick={(event) => { this.handleSubmit(event); this.props.toggleNewModal(); this.props.loadingTrue();}} isColor='success'>Submit</Button>
             </ModalCardFooter>
         </ModalCard>
     )

@@ -1,17 +1,14 @@
 import React, { Component } from 'react'
-import { render } from 'react-dom';
 import EditView from '../../components/editView/editView'
 import {
-    Notification, Delete, Container, ModalBackground, CardContent, Select,
-    CardHeader, Card, Columns, Column, Button, Field, Label, Control, ModalCard, ModalCardHeader, Modal,
-    Icon, Input, Help, Title, Box, Media, MediaContent, CardImage, MediaRight, ModalCardFooter,
-    ModalCardTitle,
+    Container, ModalBackground, CardContent,
+    Card, Columns, Column, Modal,
+    Icon, Title, Box, Media, MediaContent,
 } from 'bloomer'
-import { CloudinaryContext, Transformation, Image } from 'cloudinary-react';
+import { CloudinaryContext, Image } from 'cloudinary-react';
 import { getUserData } from '../../libraries/authentication'
 import withRouter from '../../../node_modules/react-router-dom/withRouter'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Link } from 'react-router-dom'
 import $ from 'jquery'
 import NewProductModel from '../../components/newProductModel/newProductModel';
 import { ClipLoader } from 'react-spinners';

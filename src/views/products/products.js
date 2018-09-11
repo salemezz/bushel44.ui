@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import {
-    Box, Title, Modal, Media, ModalBackground, ModalContent, ModalClose,
-    MediaContent, Columns, Column, Card, CardContent, Container,
+    Title, Media, MediaContent, Columns, 
+    Column, Card, CardContent, Container,
 } from 'bloomer';
-import { Link, withRouter } from 'react-router-dom'
-import { getUserData } from '../../libraries/authentication'
+import { Link } from 'react-router-dom'
 import { CloudinaryContext, Transformation, Image } from 'cloudinary-react';
 
 
@@ -13,11 +12,9 @@ export default class Products extends Component {
         products: [],
         selectedProduct: null,
         notificationVisible: false,
-        is_active: false,
+        is_active : false,
         error: ''
     }
-
-
 
     componentDidMount() {
         fetch('https://bushel44.herokuapp.com/api/products')
@@ -37,33 +34,12 @@ export default class Products extends Component {
             })
     }
 
-    toggleModal = () => {
+    toggleModal = (product) => {
         if (!this.state.is_active) {
             this.setState({ ...this.state, is_active: true })
         } else {
             this.setState({ ...this.state, is_active: false })
         }
-    }
-
-    // componentDidMount(){
-    //     fetch('/api/products')
-    //     .then(response=>response.json())
-    //     .then(data=>{
-    //         console.log(data);
-    //         this.setState({...this.state, products:data})
-    //     })
-    //     .then(console.log(`products: ${this.state.products}`))
-    //     .catch(err=>{
-    //         this.setState({
-    //             ...this.state, 
-    //             notificationVisible:false,
-    //             error: err
-    //         })
-    //     })
-    // }
-
-    selectProduct = () => {
-
     }
 
     hideNotification = () => {
@@ -95,11 +71,9 @@ export default class Products extends Component {
                                                         </ModalContent>
                                                         <ModalClose onClick={this.toggleModal} />
                                                     </Modal> */}
-
                                                     <ul>
                                                         <li><b>Quantity:</b> {product.stock} </li>
                                                         <li><b>Type:</b> {product.type} </li>
-                                                        <li><b>Details:</b> {product.details} </li>
                                                         <li><b>User: </b>
                                                             <Link to={{
                                                                 pathname: '/users/' + product.creatorId,
@@ -107,14 +81,13 @@ export default class Products extends Component {
                                                                     profileUserID: product.creatorId
                                                                 }
                                                             }}>{product.postedBy}</Link></li>
+                                                        <li><b>Details:</b> {product.details} </li>                                     
                                                     </ul>
-
                                                 </CloudinaryContext>
                                             </MediaContent>
                                         </Media>
                                     )
                                 })}
-
                             </CardContent>
                         </Card>
                     </Column>

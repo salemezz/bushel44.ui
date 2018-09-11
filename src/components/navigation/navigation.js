@@ -6,7 +6,6 @@ import {
     NavbarMenu, NavbarStart, NavbarBurger, Title,
     Button, Image,
 } from 'bloomer'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { getUserData, checkIfAuthenticated, deauthenticate } from '../../libraries/authentication'
 import logo from '../../bushel.png'
 import './navigation.css'
@@ -38,8 +37,8 @@ class Navigation extends Component {
         let item = (
             <NavbarEnd>
                 <NavbarItem>
-                    <Button isColor='black' className="login" isOutlined>
-                        <Link to='/login'>
+                    <Button isColor='black' isOutlined>
+                        <Link style={{ color: 'black' }} to='/login'>
                             Login
                         </Link>
                     </Button>

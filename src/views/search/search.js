@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import {
-    Box, Title, Field, Media, Control, Input,
-    MediaContent, Subtitle, Button, Columns,
-    Column, Card, CardContent, Container, Notification, Delete
+    Title, Media,
+    MediaContent,Columns,
+    Column, Card, CardContent, Container
 } from 'bloomer';
-import { CloudinaryContext, Transformation, Image } from 'cloudinary-react';
+import { Link } from 'react-router-dom'
+
+import { Image } from 'cloudinary-react';
 import withRouter from '../../../node_modules/react-router-dom/withRouter';
-// import SearchResults from './searchResults';
 import $ from 'jquery'
 
 
@@ -22,7 +23,7 @@ class Search extends Component {
         hideResult: true
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.setState({ ...this.state, loading: true })
         this.setState({ ...this.state, hideResult: false })
 
@@ -72,42 +73,49 @@ class Search extends Component {
     hideNotification = () => {
         this.setState({ ...this.state, notificationVisible: false })
     }
-    
+
     render() {
-            return (
-                <Container>
-                        <Title style={{ textAlign: 'center', fontSize: 'calc(20px + 2vw)'  }}>Results</Title>
-                            <Columns>
-                                <Column isSize={8} isOffset={2}>
-                                    <Card>
-                                        <CardContent>
-                                        {this.state.searchResults.map((searchResult) => {
-                                            console.log(searchResult)
-                                            return (
-                                                <Media>
-                                                    <MediaContent>
-                                                        <Title style={{ textAlign: 'center', fontSize: 'calc(8px + 2vw)' }}>{`${searchResult.productName}`}</Title>
-                                                        <Image style={{ width: "auto" }} cloudName="dozenuld4" secure="true" publicId={searchResult.image} >
-                                                            {/* <Transformation width="300" height="100" crop="scale"/> */}
-                                                        </Image>
-                                                        <ul>
-                                                            <li><b>Quantity:</b> {searchResult.stock} </li>
-                                                            <li><b>Type:</b> {searchResult.type} </li>
-                                                            <li><b>Details:</b> {searchResult.details} </li>
-                                                        </ul>
-                                                    </MediaContent>
-                                                
-                                                </Media>
-                                            )
-                                        })}
-                                        </CardContent>
-                                    </Card>
-                                </Column>
-                            </Columns>
-                    </Container>
-            )
-        }
+        return (
+            <Container>
+                <Title style={{ textAlign: 'center', fontSize: 'calc(20px + 2vw)' }}>Results</Title>
+                <Columns>
+                    <Column isSize={8} isOffset={2}>
+                        <Card>
+                            <CardContent>
+                                {this.state.searchResults.map((searchResult) => {
+                                    console.log(searchResult)
+                                    return (
+                                        <Media>
+                                            <MediaContent>
+                                                <Title style={{ textAlign: 'center', fontSize: 'calc(8px + 2vw)' }}>{`${searchResult.productName}`}</Title>
+                                                <Image style={{ width: "auto" }} cloudName="dozenuld4" secure="true" publicId={searchResult.image} >
+                                                    {/* <Transformation width="300" height="100" crop="scale"/> */}
+                                                </Image>
+                                                <ul>
+                                                    <li><b>Quantity:</b> {searchResult.stock} </li>
+                                                    <li><b>Type:</b> {searchResult.type} </li>
+                                                    <li><b>User: </b>
+                                                        <Link to={{
+                                                            pathname: '/users/' + searchResult.creatorId,
+                                                            state: {
+                                                                profileUserID: searchResult.creatorId
+                                                            }
+                                                        }}>{searchResult.postedBy}</Link></li>
+                                                    <li><b>Details:</b> {searchResult.details} </li>
+                                                </ul>
+                                            </MediaContent>
+
+                                        </Media>
+                                    )
+                                })}
+                            </CardContent>
+                        </Card>
+                    </Column>
+                </Columns>
+            </Container>
+        )
     }
+}
 
 
 export default withRouter(Search)
