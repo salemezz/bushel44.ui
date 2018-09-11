@@ -165,7 +165,7 @@ class ProtectedView extends Component {
                         </Modal>
                         <Column isSize={6} >
                             <Title style={{ fontSize: 'calc(20px + .75vw)' }}>My Products
-                                <Icon className="onHover" style={{ fontSize: 'calc(20px + 1vw)', float: 'right', marginRight: '20px' }} onClick={this.toggleNewModal} isColor='warning' >
+                                <Icon className="onHover" style={{ fontSize: 'calc(20px + 1vw)', float: 'right' }} onClick={this.toggleNewModal} isColor='warning' >
                                     <FontAwesomeIcon icon={['fa', 'plus-square']} />
                                 </Icon>
                             </Title>
@@ -181,14 +181,13 @@ class ProtectedView extends Component {
                                                             <ModalBackground />
                                                             <EditView loadingTrue={this.loadingTrue} loadingFalse={this.loadingFalse} protectedState={this.state} handleEdit={this.handleEdit} toggleModal={this.toggleModal} />
                                                         </Modal>
-                                                        <Title style={{ fontSize: 'calc(8px + 1.75vw)' }}>{`${myProduct.productName}`}
+                                                        <Icon onClick={() => { this.onItemsSelect(myProduct); this.deleteProduct(myProduct); }} className="myProduct-icons onHover" >
+                                                                <FontAwesomeIcon style={{ float: 'right' }} icon={['fa', 'minus-circle']} />
+                                                            </Icon>
                                                             <Icon onClick={() => { this.onItemsSelect(myProduct); this.toggleModal(); }} className="myProduct-icons onHover">
                                                                 <FontAwesomeIcon style={{ float: 'right' }} icon={['fa', 'edit']} />
                                                             </Icon>
-                                                            <Icon onClick={() => { this.onItemsSelect(myProduct); this.deleteProduct(myProduct); }} className="myProduct-icons onHover" >
-                                                                <FontAwesomeIcon style={{ float: 'right' }} icon={['fa', 'minus-circle']} />
-                                                            </Icon>
-                                                        </Title>
+                                                        <Title style={{ fontSize: 'calc(7px + 1.75vw)' }}>{`${myProduct.productName}`}</Title>
                                                         <Image style={{ width: "auto" }} cloudName="dozenuld4" secure="true" publicId={myProduct.image} >
                                                             {/* <Transformation width="300" height="100" crop="scale"/> */}
                                                         </Image>
