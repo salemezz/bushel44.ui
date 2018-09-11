@@ -15,6 +15,7 @@ import { Link } from 'react-router-dom'
 import $ from 'jquery'
 import NewProductModel from '../../components/newProductModel/newProductModel';
 import { ClipLoader } from 'react-spinners';
+import './protectedView.css'
 
 var override = {
     display: 'block',
@@ -126,7 +127,7 @@ class ProtectedView extends Component {
             this.setState({ ...this.state, is_active1: true })
         } else {
             this.setState({ ...this.state, is_active1: false })
-            
+
         }
     }
 
@@ -163,8 +164,8 @@ class ProtectedView extends Component {
                             />
                         </Modal>
                         <Column isSize={6} >
-                            <Title isSize={4}>My Products
-                            <Icon style={{ float: 'right' }} onClick={this.toggleNewModal} isColor='warning' >
+                            <Title style={{ fontSize: 'calc(20px + .75vw)' }}>My Products
+                                <Icon className="onHover" style={{ fontSize: 'calc(20px + 1vw)', float: 'right', marginRight: '20px' }} onClick={this.toggleNewModal} isColor='warning' >
                                     <FontAwesomeIcon icon={['fa', 'plus-square']} />
                                 </Icon>
                             </Title>
@@ -175,8 +176,19 @@ class ProtectedView extends Component {
                                             console.log(myProduct)
                                             return (
                                                 <Media>
-                                                    <MediaContent style={{ paddingLeft: "50px" }}>
-                                                        <Title isSize={4}>{`${myProduct.productName}`}</Title>
+                                                    <MediaContent>
+                                                        <Modal isActive={this.state.is_active}>
+                                                            <ModalBackground />
+                                                            <EditView loadingTrue={this.loadingTrue} loadingFalse={this.loadingFalse} protectedState={this.state} handleEdit={this.handleEdit} toggleModal={this.toggleModal} />
+                                                        </Modal>
+                                                        <Title style={{ fontSize: 'calc(8px + 1.75vw)' }}>{`${myProduct.productName}`}
+                                                            <Icon onClick={() => { this.onItemsSelect(myProduct); this.toggleModal(); }} className="myProduct-icons onHover">
+                                                                <FontAwesomeIcon style={{ float: 'right' }} icon={['fa', 'edit']} />
+                                                            </Icon>
+                                                            <Icon onClick={() => { this.onItemsSelect(myProduct); this.deleteProduct(myProduct); }} className="myProduct-icons onHover" >
+                                                                <FontAwesomeIcon style={{ float: 'right' }} icon={['fa', 'minus-circle']} />
+                                                            </Icon>
+                                                        </Title>
                                                         <Image style={{ width: "auto" }} cloudName="dozenuld4" secure="true" publicId={myProduct.image} >
                                                             {/* <Transformation width="300" height="100" crop="scale"/> */}
                                                         </Image>
@@ -186,14 +198,14 @@ class ProtectedView extends Component {
                                                             <li><b>Details:</b> {myProduct.details} </li>
                                                         </ul>
                                                     </MediaContent>
-                                                    <Modal isActive={this.state.is_active}>
+                                                    {/* <Modal isActive={this.state.is_active}>
                                                         <ModalBackground />
                                                         <EditView loadingTrue={this.loadingTrue} loadingFalse={this.loadingFalse} protectedState={this.state} handleEdit={this.handleEdit} toggleModal={this.toggleModal} />
                                                     </Modal>
                                                     <Icon onClick={() => { this.onItemsSelect(myProduct); this.toggleModal(); }} isSize='small' style={{ paddingRight: '15px', paddingLeft: '15px' }}>
                                                         <FontAwesomeIcon icon={['fa', 'edit']} />
                                                     </Icon>
-                                                    <Delete onClick={() => { this.onItemsSelect(myProduct); this.deleteProduct(myProduct); }} />
+                                                    <Delete onClick={() => { this.onItemsSelect(myProduct); this.deleteProduct(myProduct); }} /> */}
                                                 </Media>
                                             )
                                         })}

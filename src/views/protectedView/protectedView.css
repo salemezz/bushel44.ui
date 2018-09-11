@@ -1,0 +1,16 @@
+    .myProduct-icons {
+        font-size: 12pt;
+        float: right;
+    }
+    .onHover:hover {
+        color: green;
+    }
+
+@media (min-width: 640px) {
+    .myProduct-icons {
+        float: right;
+        font-size: 18pt; 
+        margin-left: 5px; 
+    }
+}
+
