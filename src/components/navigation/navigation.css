@@ -1,19 +1,37 @@
-
 .navbar-brand {
-    /* background-color: rgba(83, 204, 46, 0.836) !important; */
+    padding: 0px;
+    min-height: 25px;
+}
+.navbar {
+  height: auto;
+}
+
+.logo {
+    width: 250px;
+    height: auto;
+    margin-top: 5px;
+    margin-left: 25px;
 }
 
 .title {
-  font-family: 'Cash Currency';
+    font-family: 'Cash Currency';
 }
 
 @media (min-width: 640px) {
-  .title {
-    font-family: 'Cash Currency';
-  }
+    .logo {
+        width: 250px;
+        height: auto;
+        margin-top: 10px;
+        margin-left: 25px;
+    }
+    .navbar-brand {
+        margin: 0px;
+        padding: 0px;
+        height: 110px;
+    }
 }
 
 @font-face {
-  font-family: 'Cash Currency';
-  src: url('./Cash Currency.ttf')format('truetype');
-  }
+    font-family: 'Cash Currency';
+    src: url('./Cash Currency.ttf')format('truetype');
+}

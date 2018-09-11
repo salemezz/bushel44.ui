@@ -73,7 +73,7 @@ export default class Products extends Component {
     render() {
         return (
             <Container>
-                <Title style={{ textAlign: 'center', fontSize: 'calc(20px + 2vw)'  }}>Products</Title>
+                <Title style={{ textAlign: 'center', fontSize: 'calc(10px + 2vw)'  }}>Products</Title>
                 <Columns>
                     <Column isSize={6} isOffset={3}>
                         <Card>

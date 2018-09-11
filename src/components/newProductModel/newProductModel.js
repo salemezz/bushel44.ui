@@ -125,7 +125,7 @@ render() {
                 </Field>
             </ModalCardBody>
             <ModalCardFooter>
-                <Button onClick={(event) => { this.handleSubmit(event); this.props.toggleNewModal(); this.props.loadingTrue();}} isColor='success'>Submit</Button>
+                <Button style={{ float: 'right', }} isLoading={this.props.loading} onClick={(event) => { this.handleSubmit(event); this.props.toggleNewModal(); this.props.loadingTrue();}} isColor='success'>Submit</Button>
             </ModalCardFooter>
         </ModalCard>
     )

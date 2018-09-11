@@ -41,7 +41,7 @@ class SearchBox extends Component {
                   </Control>
                   <Control>
                     <Button isColor='black' isOutlined>
-                      <Link to={{
+                      <Link style={{ color: 'black' }} to={{
                         pathname: '/search',
                         search: '?searchTerm=' + this.state.value
                       }}> Search</Link>

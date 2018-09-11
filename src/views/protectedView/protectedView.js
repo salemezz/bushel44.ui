@@ -157,6 +157,7 @@ class ProtectedView extends Component {
                             <NewProductModel
                                 loadingTrue={this.loadingTrue}
                                 loadingFalse={this.loadingFalse}
+                                loading={this.state.loading}
                                 toggleNewModal={this.toggleNewModal}
                                 myReload={this.myReload}
                                 creatorId={this.state.creatorId}

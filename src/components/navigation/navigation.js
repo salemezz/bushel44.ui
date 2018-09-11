@@ -38,7 +38,7 @@ class Navigation extends Component {
         let item = (
             <NavbarEnd>
                 <NavbarItem>
-                    <Button isColor='info' className="login" isOutlined>
+                    <Button isColor='black' className="login" isOutlined>
                         <Link to='/login'>
                             Login
                         </Link>
@@ -55,20 +55,20 @@ class Navigation extends Component {
                         </Link>
                     </NavbarItem>
                     <NavbarItem>
-                        <Button isColor='info' isOutlined onClick={this.handleLogOut}>Log Out</Button>
+                        <Button isColor='black' isOutlined onClick={this.handleLogOut}>Log Out</Button>
                     </NavbarItem>
                 </NavbarEnd>
             )
         }
         return (
-            <Navbar className="navbar" style={{ margin: '0px', padding: '0px' }}>
+            <Navbar className="navbar">
                 <NavbarBrand style={{ backgroundColor: 'rgba(83, 204, 46, 0.836)' }}>
-                            <Image style={{ width: '180px', height: 'auto', margin: 20, marginLeft: 25 }} src={logo} />
+                            <Image className="logo" src={logo} />
                     <NavbarItem>
                         <Link to='/'>
                             {
                                 <NavbarItem className='title'>
-                                    <Title className='mainTitle' hasTextAlign='centered' isSize={5}>Bushel 44</Title>
+                                    <Title className='mainTitle' hasTextAlign='centered' style={{ fontSize: 'calc(14px + 1vw)' }}>Bushel 44</Title>
                                 </NavbarItem>
                             }
                         </Link>

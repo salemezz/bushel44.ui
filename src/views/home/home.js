@@ -9,10 +9,10 @@ export default class Home extends Component {
     render() {
         return (
                 <Container>
-                         <Image style={{ width: 'auto', height: 'auto', margin: 'auto' }} src={Background} />
+                         <Image style={{ maxWidth: '650px', width: 'auto', height: 'auto', padding: '25px', marginLeft: 'auto', marginRight: 'auto' }} src={Background} />
                     <Box>
                         <Columns>
-                            <Column isSize={8} isOffset={2}>
+                            <Column isSize={12}>
                                 <Title className='has-text-centered'>
                                     News to come!
                                 </Title>
