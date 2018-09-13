@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import {
-    Notification, Delete, Container, CardHeaderTitle, CardContent, Select,
-    CardHeader, Card, Columns, Column, Button, Field, Label, Control,
-    Icon, Input, Help, Title, Box, Media, MediaContent, Subtitle, MediaRight,
+    Notification, Delete, Container, CardContent, 
+    Card, Columns, Column, Label,
+    Title, Media, MediaContent, Subtitle
 } from 'bloomer'
 import withRouter from '../../../node_modules/react-router-dom/withRouter';
 import { CloudinaryContext, Transformation, Image } from 'cloudinary-react';
 import $ from 'jquery'
-import { Link } from 'react-router-dom'
 
 class UnprotectedView extends Component {
     // export default class UnprotectedView extends Component {
@@ -136,14 +135,7 @@ class UnprotectedView extends Component {
                                                     </Modal> */}
                                                     <ul>
                                                         <li><b>Quantity:</b> {userProduct.stock} </li>
-                                                        <li><b>Type:</b> {userProduct.type} </li>
-                                                        <li><b>User: </b>
-                                                            <Link to={{
-                                                                pathname: '/users/' + userProduct.creatorId,
-                                                                state: {
-                                                                    profileUserID: userProduct.creatorId
-                                                                }
-                                                            }}>{userProduct.postedBy}</Link></li>
+                                                        <li><b>Type:</b> {userProduct.type} </li>                                      
                                                         <li><b>Details:</b> {userProduct.details} </li>                                     
                                                     </ul>
                                                 </CloudinaryContext>

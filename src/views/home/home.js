@@ -12,7 +12,7 @@ export default class Home extends Component {
                     <Box>
                         <Columns>
                             <Column isSize={12}>
-                                <Title className='has-text-centered'>
+                                <Title isSize={4} className='has-text-centered'>
                                     News to come!
                                 </Title>
                             </Column>
