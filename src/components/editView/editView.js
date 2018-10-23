@@ -162,7 +162,7 @@ class EditView extends Component {
                     </Field>
                     <Field>
                         <Input type="file" onChange={this.fileChangedHandler} />
-                        <Button style={{ marginTop: '10px' }} isLoading={this.state.photoUploading} onClick={this.handlePhotoEdit}>Upload!</Button>
+                        <Button isColor='info' style={{ marginTop: '10px' }} isLoading={this.state.photoUploading} onClick={this.handlePhotoEdit}>Upload!</Button>
                     </Field>
                     <Notification isColor='danger' isHidden={!this.state.notificationVisible}>
                         {this.state.error}

@@ -9,15 +9,6 @@ export default class Home extends Component {
         return (
                 <Container>
                          <Image style={{ maxWidth: '500px', width: 'auto', height: 'auto', padding: '25px', marginLeft: 'auto', marginRight: 'auto' }} src={Background} />
-                    <Box>
-                        <Columns>
-                            <Column isSize={12}>
-                                <Title isSize={4} className='has-text-centered'>
-                                    News to come!
-                                </Title>
-                            </Column>
-                        </Columns>
-                    </Box>
                 </Container>
         )
     }
