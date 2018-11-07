@@ -151,7 +151,7 @@ class ProtectedView extends Component {
                         </Modal>
                         <Modal isActive={this.state.is_active1}>
                             <ModalBackground />
-                            <NewProductModel
+                            <NewProductModel 
                                 loadingTrue={this.loadingTrue}
                                 loadingFalse={this.loadingFalse}
                                 loading={this.state.loading}
@@ -161,13 +161,13 @@ class ProtectedView extends Component {
                                 postedBy={this.state.postedBy}
                             />
                         </Modal>
-                        <Column isSize={6} >
+                        <Column isSize={6}>
                             <Title style={{ fontSize: 'calc(20px + .75vw)' }}>My Products
-                                <Icon className="onHover" style={{ fontSize: 'calc(20px + 1vw)', float: 'right' }} onClick={this.toggleNewModal} isColor='warning' >
+                                <Icon className="onHover" style={{ fontSize: 'calc(20px + 1vw)', float: 'right' }} onClick={this.toggleNewModal} isColor='warning'>
                                     <FontAwesomeIcon icon={['fa', 'plus-square']} />
                                 </Icon>
                             </Title>
-                            <Card>
+                            <Card style={{ backgroundColor: 'rgba(0, 0, 0, .05)', border: ".75px solid black" }}>
                                 <CardContent>
                                     <CloudinaryContext>
                                         {this.state.myProducts.map((myProduct) => {
@@ -186,7 +186,7 @@ class ProtectedView extends Component {
                                                                 <FontAwesomeIcon style={{ float: 'right' }} icon={['fa', 'edit']} />
                                                             </Icon>
                                                         <Title style={{ fontSize: 'calc(7px + 1.75vw)' }}>{`${myProduct.productName}`}</Title>
-                                                        <Image style={{ width: "auto" }} cloudName="dozenuld4" secure="true" publicId={myProduct.image} >
+                                                        <Image style={{ width: "auto", border: ".75px solid black" }} cloudName="dozenuld4" secure="true" publicId={myProduct.image} >
                                                             {/* <Transformation width="300" height="100" crop="scale"/> */}
                                                         </Image>
                                                         <ul>

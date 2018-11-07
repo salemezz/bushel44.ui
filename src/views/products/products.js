@@ -80,7 +80,7 @@ export default class Products extends Component {
                     </div>
                 </Modal>
                     <Column isSize={6} isOffset={3}>
-                        <Card>
+                        <Card style={{ backgroundColor: 'rgba(113, 219, 80, .8)', border: ".75px solid black" }} >
                             <CardContent>
                                 {this.state.products.map((product) => {
                                     console.log('image ' + product.productName)
@@ -89,16 +89,8 @@ export default class Products extends Component {
                                             <MediaContent>
                                                 <CloudinaryContext>
                                                     <Title style={{ textAlign: 'center', fontSize: 'calc(8px + 2vw)' }}>{`${product.productName}`}</Title>
-                                                    <Image onClick={this.toggleModal} style={{ width: "auto", maxHeight: "auto" }} cloudName="dozenuld4" secure="true" publicId={product.image}>
+                                                    <Image onClick={this.toggleModal} style={{ border: ".5px solid black", width: "auto", maxHeight: "auto" }} cloudName="dozenuld4" secure="true" publicId={product.image}>
                                                     </Image>
-                                                    {/* <Modal isActive={this.state.is_active}>
-                                                        <ModalBackground />
-                                                        <ModalContent>
-                                                            <Image style={{ width: "auto", maxHeight: "auto" }} cloudName="dozenuld4" secure="true" publicId={product.image}>
-                                                            </Image>
-                                                        </ModalContent>
-                                                        <ModalClose onClick={this.toggleModal} />
-                                                    </Modal> */}
                                                     <ul>
                                                         <li><b>Quantity:</b> {product.stock} </li>
                                                         <li><b>Type:</b> {product.type} </li>
@@ -106,7 +98,7 @@ export default class Products extends Component {
                                                             <Link to={{
                                                                 pathname: '/users/' + product.creatorId,
                                                                 state: {
-                                                                    profileUserID: product.creatorId
+                                                                profileUserID: product.creatorId
                                                                 }
                                                             }}>{product.postedBy}</Link></li>
                                                         <li><b>Details:</b> {product.details} </li>

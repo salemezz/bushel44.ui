@@ -61,8 +61,12 @@ class Navigation extends Component {
         }
         return (
             <Navbar className="navbar">
-                <NavbarBrand style={{ backgroundColor: 'rgba(83, 204, 46, 0.836)' }}>
-                            <Image className="logo" src={logo} />
+                <NavbarBrand style={{ backgroundColor: 'rgba(113, 219, 80, 1)' }}>
+                        <Link to='/'>
+                            {
+                                <Image className="logo" src={logo} />
+                            }
+                        </Link>
                     <NavbarItem>
                         <Link to='/'>
                             {
@@ -74,31 +78,8 @@ class Navigation extends Component {
                     </NavbarItem>
                     <NavbarBurger isActive={this.state.isActive} onClick={this.onClickNav} />
                 </NavbarBrand>
-                <NavbarMenu style={{ backgroundColor: 'rgba(83, 204, 46, 0.836)' }} isActive={this.state.isActive} >
+                <NavbarMenu style={{ backgroundColor: 'rgba(113, 219, 80, 1)' }} isActive={this.state.isActive} >
                     <NavbarStart style={{ float: '15px' }}>
-
-                        {/* <NavbarItem hasDropdown isHoverable>
-                            <NavbarLink>Views</NavbarLink>
-                            <NavbarDropdown>
-                                <NavbarItem>
-                                    <Link to='/unprotected'>
-                                        {'Unprotected View'}
-                                        <Icon isSize='small' style={{ paddingLeft: '10px' }}>
-                                            <FontAwesomeIcon icon={['fas', 'unlock']} />
-                                        </Icon>
-                                    </Link>
-                                </NavbarItem>
-                                <NavbarItem>
-                                    <Link to='/protected'>
-                                        {'Protected View'}
-                                        <Icon isSize='small' style={{ paddingLeft: '10px' }}>
-                                            <FontAwesomeIcon icon={['fas', 'lock']} />
-                                        </Icon>
-                                    </Link>
-                                </NavbarItem>
-                            </NavbarDropdown>
-                        </NavbarItem> */}
-
                         <NavbarItem>
                             <SearchBox />
                         </NavbarItem>
@@ -107,11 +88,6 @@ class Navigation extends Component {
                                 {<Title className='mainTitle' hasTextAlign='centered' isSize={6}>Products</Title>}
                             </Link>
                         </NavbarItem>
-                        {/* <NavbarItem>
-                            <Link to='/protected' onLoad={this.toggleNewModal}>
-                                {<Title className='mainTitle' hasTextAlign='centered' isSize={6}>Upload</Title>}
-                            </Link>
-                        </NavbarItem> */}
                     </NavbarStart>
                     {item}
                 </NavbarMenu>

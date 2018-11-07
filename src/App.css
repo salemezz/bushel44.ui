@@ -1,5 +1,7 @@
 section.has-background-info {
-    background-color: white !important;
+    background-color: white  !important;
+    background-repeat: no-repeat;
+    background-size: cover;
     padding-top: 24px;
 }
 

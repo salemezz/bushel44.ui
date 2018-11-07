@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import {
-  Navbar, Icon, Container, Field, NavbarItem, NavbarLink, NavbarEnd,
-  NavbarMenu, NavbarStart, NavbarBurger, Title,
-  NavbarDropdown, Button, Image, Label, Control, Input, FieldLabel
+  Field, NavbarItem, NavbarEnd, Button, Control, Input
 } from 'bloomer'
 import './searchBox.css'
 
