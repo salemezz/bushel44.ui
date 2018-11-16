@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { Link, withRouter } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import {
   Field, NavbarItem, NavbarEnd, Button, Control, Input
 } from 'bloomer'
 import './searchBox.css'
+import withRouter from '../../../node_modules/react-router-dom/withRouter';
 
 class SearchBox extends Component {
   constructor(props) {
@@ -16,15 +17,21 @@ class SearchBox extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({ value: event.target.value });
+  handleChange = (event) => {
+    this.setState({ value: event.target.value, clean: false });
     console.log(this.state.value)
   }
 
   handleSubmit(event) {
-    alert('An essay was submitted: ' + this.state.value);
-    event.preventDefault();
+    console.log('yup');
+
+      // context.history.push('/?searchTerm=' + this.state.value)
+      if(event.key == 'Enter'){
+      this.props.history.push('/search?searchTerm=' + this.state.value)
+      window.location.reload();
+      }
   }
+
 
   render() {
     return (
@@ -35,7 +42,7 @@ class SearchBox extends Component {
               <Control>
                 <Field hasAddons>
                   <Control id='searchBox'>
-                    <Input id='searchText' isColor='black' placeholder='Search Products' onKeyUp={this.handleChange} />
+                    <Input id='searchText' isColor='black' placeholder='Search Products' onKeyUp={this.handleChange} onKeyPress={this.handleSubmit} />
                   </Control>
                   <Control>
                     <Button isColor='black' isOutlined>
@@ -54,4 +61,4 @@ class SearchBox extends Component {
   }
 }
 
-export default SearchBox;
+export default withRouter(SearchBox);

@@ -32,7 +32,7 @@ class Login extends Component{
         authenticate(this.state.username, this.state.password)
         .then(()=>{
             this.props.history.push('/')
-            window.location.reload()
+            // window.location.reload()
         })
         .catch(err=>{
             this.setState({
@@ -68,17 +68,17 @@ class Login extends Component{
                                             <FontAwesomeIcon icon={['fas', 'user']}/>
                                         </Icon>
                                     </Control>
-                                    {/* <Help isHidden={this.state.username!=='' || this.state.clean} isColor='danger'>Invalid Username</Help> */}
+                                    <Help isHidden={this.state.username!=='' || this.state.clean} isColor='danger'></Help>
                                 </Field>
                                 <Field>
                                     <Label>Password</Label>
                                     <Control hasIcons='left'>
-                                        <Input type='password' isColor='info' placeholder='Password' onKeyUp={this.handlePasswordChange}/>
+                                        <Input type='password' isColor='info' placeholder='Password' onKeyUp={this.handlePasswordChange} onKeyPress={this.handleSubmit}/>
                                         <Icon isSize='small' isAlign='left'>
                                             <FontAwesomeIcon icon={['fas', 'key']}/>
                                         </Icon>
                                     </Control>
-                                    {/* <Help isHidden={this.state.password!=='' || this.state.clean} isColor='danger'>Invalid Password</Help> */}
+                                    <Help isHidden={this.state.password!=='' || this.state.clean} isColor='danger'></Help>
                                 </Field>
                                 <Button style={{float:'right'}} isLoading={this.state.loading} disabled={(this.state.username==='' || this.state.password==='')} isColor='black' isOutlined onClick={this.handleSubmit}>Login</Button>
                                 <Link to='/register'>Can't Login? Register Here!</Link>
@@ -86,10 +86,10 @@ class Login extends Component{
                         </Card>
                     </Column>
                 </Columns>
-                <Notification isColor='danger' isHidden={!this.state.notificationVisible}>
+                {/* <Notification isColor='danger' isHidden={!this.state.notificationVisible}>
                     {this.state.error}
                     <Delete onClick={this.hideNotification}/>
-                </Notification>
+                </Notification> */}
             </Container>
         )
     }
