@@ -102,7 +102,7 @@ class Login extends Component{
             <Container>
                 <Columns isCentered>
                     <Column isSize={6}>
-                        <Card>
+                        <Card style={{ backgroundColor: 'rgba(113, 219, 80, .8)', border: ".75px solid black" }}>
                             <CardHeader>
                                 <CardHeaderTitle>
                                     Login
@@ -165,7 +165,7 @@ class Login extends Component{
                                         </Icon>
                                     </Control>
                                 </Field>
-                                <Button isLoading={this.state.loading} disabled={(this.state.username==='' || this.state.password==='')} isColor='info' isOutlined onClick={this.handleSubmit}>Register</Button>
+                                <Button isLoading={this.state.loading} disabled={(this.state.username==='' || this.state.password==='')} isColor='black' isOutlined onClick={this.handleSubmit}>Register</Button>
                             </CardContent>
                         </Card>
                     </Column>

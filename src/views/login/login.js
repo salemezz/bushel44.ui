@@ -53,7 +53,7 @@ class Login extends Component{
             <Container>
                 <Columns isCentered>
                     <Column isSize={6}>
-                        <Card>
+                        <Card style={{ backgroundColor: 'rgba(113, 219, 80, .8)', border: ".75px solid black" }}>
                             <CardHeader>
                                 <CardHeaderTitle>
                                     Login
@@ -68,7 +68,7 @@ class Login extends Component{
                                             <FontAwesomeIcon icon={['fas', 'user']}/>
                                         </Icon>
                                     </Control>
-                                    <Help isHidden={this.state.username!=='' || this.state.clean} isColor='danger'>Invalid Username</Help>
+                                    {/* <Help isHidden={this.state.username!=='' || this.state.clean} isColor='danger'>Invalid Username</Help> */}
                                 </Field>
                                 <Field>
                                     <Label>Password</Label>
@@ -78,9 +78,9 @@ class Login extends Component{
                                             <FontAwesomeIcon icon={['fas', 'key']}/>
                                         </Icon>
                                     </Control>
-                                    <Help isHidden={this.state.password!=='' || this.state.clean} isColor='danger'>Invalid Password</Help>
+                                    {/* <Help isHidden={this.state.password!=='' || this.state.clean} isColor='danger'>Invalid Password</Help> */}
                                 </Field>
-                                <Button style={{float:'right'}} isLoading={this.state.loading} disabled={(this.state.username==='' || this.state.password==='')} isColor='info' isOutlined onClick={this.handleSubmit}>Login</Button>
+                                <Button style={{float:'right'}} isLoading={this.state.loading} disabled={(this.state.username==='' || this.state.password==='')} isColor='black' isOutlined onClick={this.handleSubmit}>Login</Button>
                                 <Link to='/register'>Can't Login? Register Here!</Link>
                             </CardContent>
                         </Card>

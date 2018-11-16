@@ -98,7 +98,7 @@ class UnprotectedView extends Component {
                             <Delete onClick={this.hideNotification} />
                         </Notification>
                         <Column isSize={6}>    
-                            <Card>
+                            <Card style={{ backgroundColor: 'rgba(113, 219, 80, .8)', border: ".75px solid black" }}>
                                 <CardContent>                   
                                     <Title isSize={4}>{this.state.username}</Title>
                                     <Label>
@@ -113,8 +113,8 @@ class UnprotectedView extends Component {
                
                     <Columns isCentered>
                         <Column isSize={6}>
-                        <Title isSize={6}>{this.state.username}'s Products</Title>
-                            <Card>
+                        <Title style={{ textAlign: 'center', fontSize: 'calc(8px + 1.5vw)' }}isSize={6}>{this.state.username}'s Products</Title>
+                            <Card style={{ backgroundColor: 'rgba(113, 219, 80, .8)', border: ".75px solid black" }}>
                                 <CardContent>
                                 {this.state.userProducts.map((userProduct) => {
                                     console.log('image ' + userProduct.productName)
