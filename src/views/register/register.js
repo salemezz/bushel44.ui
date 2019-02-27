@@ -78,20 +78,6 @@ class Login extends Component{
             })
         })
     }
-    
-        // authenticate(this.state.username, this.state.password)
-        // .then(()=>{
-        //     this.props.history.push('/login')
-        // })
-        // .catch(err=>{
-        //     this.setState({
-        //         ...this.state, 
-        //         loading: false,
-        //         error: err,
-        //         notificationVisible: true
-        //     })
-        // })
-        //}
 
     hideNotification = ()=>{
         this.setState({...this.state, notificationVisible:false})
@@ -102,7 +88,7 @@ class Login extends Component{
             <Container>
                 <Columns isCentered>
                     <Column isSize={6}>
-                        <Card style={{ backgroundColor: 'rgba(113, 219, 80, .8)', border: ".75px solid black" }}>
+                        <Card style={{ backgroundColor: '#FCFCFC', border: ".75px solid black" }}>
                             <CardHeader>
                                 <CardHeaderTitle>
                                     Login

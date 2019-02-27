@@ -3,12 +3,11 @@ import EditView from '../../components/editView/editView'
 import {
     Container, ModalBackground, CardContent,
     Card, Columns, Column, Modal,
-    Icon, Title, Box, Media, MediaContent,
+    Title, Box, Media, MediaContent,
 } from 'bloomer'
 import { CloudinaryContext, Image } from 'cloudinary-react';
 import { getUserData } from '../../libraries/authentication'
 import withRouter from '../../../node_modules/react-router-dom/withRouter'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import $ from 'jquery'
 import NewProductModel from '../../components/newProductModel/newProductModel';
 import { ClipLoader } from 'react-spinners';
@@ -41,7 +40,7 @@ class ProtectedView extends Component {
         this.setState({ ...this.state, loading: true })
         $.ajax({
             method: "POST",
-            url: "https://bushel44.herokuapp.com/api/myProducts",
+            url: "https://herballist.herokuapp.com/api/myProducts",
             data:
                 JSON.stringify({
                     thisUser: this.state.thisUser
@@ -94,7 +93,7 @@ class ProtectedView extends Component {
         this.setState({ ...this.state, loading: true })
         $.ajax({
             method: "DELETE",
-            url: "https://bushel44.herokuapp.com/api/products/" + JSON.stringify(myProduct.id)
+            url: "https://herballist.herokuapp.com/api/products/" + JSON.stringify(myProduct.id)
         })
             .catch(() => {
                 this.setState({ ...this.state, loading: false })
@@ -151,7 +150,7 @@ class ProtectedView extends Component {
                         </Modal>
                         <Modal isActive={this.state.is_active1}>
                             <ModalBackground />
-                            <NewProductModel 
+                            <NewProductModel
                                 loadingTrue={this.loadingTrue}
                                 loadingFalse={this.loadingFalse}
                                 loading={this.state.loading}
@@ -162,51 +161,50 @@ class ProtectedView extends Component {
                             />
                         </Modal>
                         <Column isSize={6}>
-                            <Title style={{ fontSize: 'calc(20px + .75vw)' }}>My Products
-                                <Icon className="onHover" style={{ fontSize: 'calc(20px + 1vw)', float: 'right' }} onClick={this.toggleNewModal} isColor='warning'>
-                                    <FontAwesomeIcon icon={['fa', 'plus-square']} />
-                                </Icon>
+                            <Title style={{ fontSize: 'calc(25px + .75vw)' }}>My Products
+                                {/* <Icon className="onHover" style={{ fontSize: 'calc(20px + 1vw)', float: 'right' }} onClick={this.toggleNewModal} isColor='warning'>
+                                    <FontAwesomeIcon icon={['fas', 'plus-square']} />
+                                </Icon> */}
+                                <svg height="calc(20px + 1.75vw)" onClick={this.toggleNewModal} class="onHover svg-inline--fa fa-plus-square fa-w-14" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus-square" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                <path fill="currentColor" d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm-32 252c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92H92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z">
+                                </path></svg>
                             </Title>
-                            <Card style={{ backgroundColor: 'rgba(0, 0, 0, .05)', border: ".75px solid black" }}>
+                            <Card style={{ backgroundColor: '#FCFCFC', border: ".75px solid black" }}>
                                 <CardContent>
-                                    <CloudinaryContext>
-                                        {this.state.myProducts.map((myProduct) => {
-                                            console.log(myProduct)
-                                            return (
-                                                <Media>
-                                                    <MediaContent>
-                                                        <Modal isActive={this.state.is_active}>
-                                                            <ModalBackground />
-                                                            <EditView loadingTrue={this.loadingTrue} loadingFalse={this.loadingFalse} protectedState={this.state} handleEdit={this.handleEdit} toggleModal={this.toggleModal} />
-                                                        </Modal>
-                                                        <Icon onClick={() => { this.onItemsSelect(myProduct); this.deleteProduct(myProduct); }} className="myProduct-icons onHover" >
-                                                                <FontAwesomeIcon style={{ float: 'right' }} icon={['fa', 'minus-circle']} />
-                                                            </Icon>
-                                                            <Icon onClick={() => { this.onItemsSelect(myProduct); this.toggleModal(); }} className="myProduct-icons onHover">
-                                                                <FontAwesomeIcon style={{ float: 'right' }} icon={['fa', 'edit']} />
-                                                            </Icon>
-                                                        <Title style={{ fontSize: 'calc(7px + 1.75vw)' }}>{`${myProduct.productName}`}</Title>
-                                                        <Image style={{ width: "auto", border: ".75px solid black" }} cloudName="dozenuld4" secure="true" publicId={myProduct.image} >
-                                                            {/* <Transformation width="300" height="100" crop="scale"/> */}
-                                                        </Image>
-                                                        <ul>
-                                                            <li><b>Quantity:</b> {myProduct.stock} </li>
-                                                            <li><b>Type:</b> {myProduct.type} </li>
-                                                            <li><b>Details:</b> {myProduct.details} </li>
-                                                        </ul>
-                                                    </MediaContent>
-                                                    {/* <Modal isActive={this.state.is_active}>
+                                    {this.state.myProducts.map((myProduct) => {
+                                        console.log(myProduct)
+                                        return (
+                                            <Media>
+                                                <MediaContent>
+                                                    <Modal isActive={this.state.is_active}>
                                                         <ModalBackground />
                                                         <EditView loadingTrue={this.loadingTrue} loadingFalse={this.loadingFalse} protectedState={this.state} handleEdit={this.handleEdit} toggleModal={this.toggleModal} />
                                                     </Modal>
-                                                    <Icon onClick={() => { this.onItemsSelect(myProduct); this.toggleModal(); }} isSize='small' style={{ paddingRight: '15px', paddingLeft: '15px' }}>
-                                                        <FontAwesomeIcon icon={['fa', 'edit']} />
-                                                    </Icon>
-                                                    <Delete onClick={() => { this.onItemsSelect(myProduct); this.deleteProduct(myProduct); }} /> */}
-                                                </Media>
-                                            )
-                                        })}
-                                    </CloudinaryContext>
+                                                    {/* <Icon onClick={() => { this.onItemsSelect(myProduct); this.deleteProduct(myProduct); }} className="myProduct-icons onHover" >
+                                                        <FontAwesomeIcon style={{ float: 'right' }} icon={['fa', 'minus-circle']} />
+                                                    </Icon> */}
+                                                    <svg class="onHover svg-inline--fa fa-minus-circle fa-w-16" onClick={() => { this.onItemsSelect(myProduct); this.deleteProduct(myProduct); }} height="calc(15px + 1vw)" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="minus-circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                    <path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zM124 296c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h264c6.6 0 12 5.4 12 12v56c0 6.6-5.4 12-12 12H124z">
+                                                    </path></svg>
+                                                    {/* <Icon onClick={() => { this.onItemsSelect(myProduct); this.toggleModal(); }} className="myProduct-icons onHover">
+                                                        <FontAwesomeIcon style={{ float: 'right' }} icon={['fa', 'edit']} />
+                                                    </Icon> */}
+                                                    <svg class="onHover svg-inline--fa fa-edit fa-w-18" onClick={() => { this.onItemsSelect(myProduct); this.toggleModal(); }} height="calc(15px + 1vw)" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="edit" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z">
+                                                    </path></svg>
+                                                    <Title style={{ fontSize: 'calc(7px + 1.75vw)' }}>{`${myProduct.productName}`}</Title>
+                                                    <CloudinaryContext>
+                                                        <Image style={{ width: "auto", border: ".75px solid black" }} cloudName="dozenuld4" secure="true" publicId={myProduct.image} >
+                                                        </Image>
+                                                    </CloudinaryContext>
+                                                    <ul>
+                                                        <li><b>Quantity:</b> {myProduct.stock} </li>
+                                                        <li><b>Type:</b> {myProduct.type} </li>
+                                                        <li><b>Details:</b> {myProduct.details} </li>
+                                                    </ul>
+                                                </MediaContent>
+                                            </Media>
+                                        )
+                                    })}
                                 </CardContent>
                             </Card>
                         </Column>

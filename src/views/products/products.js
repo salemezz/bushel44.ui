@@ -1,12 +1,13 @@
+import './products.css'
 import React, { Component } from 'react'
 import {
     Title, Media, MediaContent, Columns, Modal,
-    Column, Card, CardContent, Container, ModalBackground
+    Column, Card, CardContent, Box, Container, ModalBackground
 } from 'bloomer';
 import { Link } from 'react-router-dom'
-import { CloudinaryContext, Image } from 'cloudinary-react';
+import { Image, Transformation, CloudinaryContext } from 'cloudinary-react'
+import LinesEllipsis from 'react-lines-ellipsis'
 import { ClipLoader } from 'react-spinners';
-
 
 var override = {
     display: 'block',
@@ -26,13 +27,12 @@ export default class Products extends Component {
     myReload = () => {
         console.log('loading ' + this.state.loading)
         this.setState({ ...this.state, loading: true })
-        fetch('https://bushel44.herokuapp.com/api/products')
-            // .then()
+        fetch('https://herballist.herokuapp.com/api/products')
             .then(response => response.json())
             .then(data => {
                 console.log('data: ' + data);
                 this.setState({ ...this.state, products: data })
-     
+
                 console.log(this.state.products[0].creatorId)
             })
             .then(console.log('loading ' + this.state.loading))
@@ -50,7 +50,7 @@ export default class Products extends Component {
         this.myReload();
     }
 
-    toggleModal = (product) => {
+    toggleModal = () => {
         if (!this.state.is_active) {
             this.setState({ ...this.state, is_active: true })
         } else {
@@ -65,32 +65,35 @@ export default class Products extends Component {
     render() {
         return (
             <Container>
-                <Title style={{ textAlign: 'center', fontSize: 'calc(10px + 2vw)' }}>Products</Title>
-                <Columns>
-                <Modal isActive={this.state.loading}>
-                    <ModalBackground />
-                    <div className='sweet-loading'>
-                        <ClipLoader
-                            className={override}
-                            sizeUnit={"px"}
-                            size={150}
-                            color={'#123abc'}
-                            loading={this.state.loading}
-                        />
-                    </div>
-                </Modal>
-                    <Column isSize={6} isOffset={3}>
-                        <Card style={{ backgroundColor: 'rgba(113, 219, 80, .8)', border: ".75px solid black" }} >
-                            <CardContent>
-                                {this.state.products.map((product) => {
-                                    console.log('image ' + product.productName)
-                                    return (
-                                        <Media>
-                                            <MediaContent>
-                                                <CloudinaryContext>
-                                                    <Title style={{ textAlign: 'center', fontSize: 'calc(8px + 2vw)' }}>{`${product.productName}`}</Title>
-                                                    <Image onClick={this.toggleModal} style={{ border: ".5px solid black", width: "auto", maxHeight: "auto" }} cloudName="dozenuld4" secure="true" publicId={product.image}>
-                                                    </Image>
+                <Box style={{ borderRadius: '0px', backgroundColor: '#FCFCFC' }} isSize='large'>
+                    <Title style={{ textAlign: 'center', fontSize: 'calc(10px + 2vw)' }}>Products</Title>
+                    <Modal isActive={this.state.loading}>
+                        <ModalBackground />
+                        <div className='sweet-loading'>
+                            <ClipLoader
+                                className={override}
+                                sizeUnit={"px"}
+                                size={150}
+                                color={'#123abc'}
+                                loading={this.state.loading}
+                            />
+                        </div>
+                    </Modal>
+                    <Columns isMultiline>
+                        {this.state.products.map((product) => {
+                            return (
+                                <Column isSize={3}>
+                                    <Card id="cardDiv">
+                                        <CardContent>
+                                            <Media>
+                                                <MediaContent>
+                                                    <Title style={{ textAlign: 'center', fontSize: 'calc(12px + .4vw)' }}>{`${product.productName}`}</Title>
+                                                    <CloudinaryContext style={{ textAlign: 'center' }} cloudName="dozenuld4" >
+                                                        <Image publicId={product.image}>
+                                                            <Transformation width="auto" height="180" gravtiy="center" crop="fill" />
+                                                        </Image>
+                                                    </CloudinaryContext>
+
                                                     <ul>
                                                         <li><b>Quantity:</b> {product.stock} </li>
                                                         <li><b>Type:</b> {product.type} </li>
@@ -98,21 +101,29 @@ export default class Products extends Component {
                                                             <Link to={{
                                                                 pathname: '/users/' + product.creatorId,
                                                                 state: {
-                                                                profileUserID: product.creatorId
+                                                                    profileUserID: product.creatorId
                                                                 }
                                                             }}>{product.postedBy}</Link></li>
-                                                        <li><b>Details:</b> {product.details} </li>
+                                                        <li>
+                                                            <LinesEllipsis
+                                                                text={product.details}
+                                                                maxLine='10'
+                                                                ellipsis='...'
+                                                                trimRight
+                                                                basedOn='letters'
+                                                            />
+                                                        </li>
                                                     </ul>
-                                                </CloudinaryContext>
-                                            </MediaContent>
-                                        </Media>
-                                    )
-                                })}
-                            </CardContent>
-                        </Card>
-                    </Column>
-                </Columns>
-            </Container>
+                                                </MediaContent>
+                                            </Media>
+                                        </CardContent>
+                                    </Card>
+                                </Column>
+                            )
+                        })}
+                    </Columns>
+                </Box>
+            </Container >
         )
     }
 }

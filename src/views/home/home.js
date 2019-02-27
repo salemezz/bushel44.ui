@@ -1,15 +1,20 @@
 import React, { Component } from 'react'
-import { Box, Title, Columns, Column, Image, Container } from 'bloomer'
+import { Box, Title } from 'bloomer'
 import './home.css'
-import Background from '../../images/bushel44_homepage.png';
 
 
 export default class Home extends Component {
     render() {
         return (
-                <Container>
-                         <Image style={{ maxWidth: '500px', width: 'auto', height: 'auto', padding: '25px', marginLeft: 'auto', marginRight: 'auto' }} src={Background} />
-                </Container>
+            <Box style={{ borderRadius: '0px', backgroundColor: '#FCFCFC' }} isSize='large'>
+                {/* <Image style={{ marginLeft: 'auto', marginRight: 'auto', paddingBottom: '10px' }} src={scale} />
+                <Columns className="resp-container" isMobile isCentered>
+                <div class="video-responsive">
+                    <iframe width="420" height="315" src="https://www.youtube.com/embed/oSiSUQYEXGw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                </Columns> */}
+                <Title style={{ textAlign: 'center', fontSize: 'calc(10px + 2vw)' }}>more to come.</Title>
+            </Box>
         )
     }
 }

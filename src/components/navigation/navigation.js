@@ -4,11 +4,13 @@ import SearchBox from '../searchBox/searchBox'
 import {
     Navbar, NavbarEnd, NavbarBrand, NavbarItem,
     NavbarMenu, NavbarStart, NavbarBurger, Title,
-    Button, Image,
+    Button, Image, Container
 } from 'bloomer'
 import { getUserData, checkIfAuthenticated, deauthenticate } from '../../libraries/authentication'
-import logo from '../../bushel.png'
+import logo from '../../herballist.png'
 import './navigation.css'
+import { Columns } from 'bloomer/lib/grid/Columns';
+import { Column } from 'bloomer/lib/grid/Column';
 
 class Navigation extends Component {
     state = {
@@ -37,59 +39,62 @@ class Navigation extends Component {
         let item = (
             <NavbarEnd>
                 <NavbarItem>
-                    <Button isColor='black' isOutlined>
-                        <Link style={{ color: 'black' }} to='/login'>
+                    <Button style={{ backgroundColor: '#9CCB66'}}  isOutlined>
+                        <Link style={{ color: '#598254' }} to='/login'>
                             Login
                         </Link>
                     </Button>
                 </NavbarItem>
             </NavbarEnd>
         )
+
         if (checkIfAuthenticated()) {
             item = (
                 <NavbarEnd>
-                    <NavbarItem>
+                    <NavbarItem style={{marginLeft: '50px' }}>
                         <Link to='/protected'>
-                            <Title hasTextAlign='centered' isSize={6}>{this.state.userData.username}</Title>
+                            <Title hasTextAlign='centered' isSize={6} style={{ color: 'white' }} >{this.state.userData.username}</Title>
                         </Link>
                     </NavbarItem>
                     <NavbarItem>
-                        <Button isColor='black' isOutlined onClick={this.handleLogOut}>Log Out</Button>
+                        <Button style={{ color: '#598254', backgroundColor: '#9CCB66'}} isOutlined onClick={this.handleLogOut}>Log Out</Button>
                     </NavbarItem>
                 </NavbarEnd>
             )
         }
+
+        let logolink = (
+            <NavbarItem>
+                <Link to='/'>
+                    {
+                        <Image className="logo" src={logo} />
+                    }
+                </Link>
+            </NavbarItem>
+        )
         return (
-            <Navbar className="navbar">
-                <NavbarBrand style={{ backgroundColor: 'rgba(113, 219, 80, 1)' }}>
-  
-                                <Image className="logo" src={logo} />
-    
-                    <NavbarItem>
-                        <Link to='/'>
-                            {
-                                <NavbarItem className='title'>
-                                    <Title className='mainTitle' hasTextAlign='centered' style={{ fontSize: 'calc(14px + 1vw)' }}>Bushel 44</Title>
-                                </NavbarItem>
-                            }
-                        </Link>
-                    </NavbarItem>
-                    <NavbarBurger isActive={this.state.isActive} onClick={this.onClickNav} />
-                </NavbarBrand>
-                <NavbarMenu style={{ backgroundColor: 'rgba(113, 219, 80, 1)' }} isActive={this.state.isActive} >
-                    <NavbarStart style={{ float: '15px' }}>
-                        <NavbarItem>
-                            <SearchBox />
-                        </NavbarItem>
-                        <NavbarItem>
-                            <Link to='/products'>
-                                {<Title className='mainTitle' hasTextAlign='centered' isSize={6}>Products</Title>}
-                            </Link>
-                        </NavbarItem>
-                    </NavbarStart>
-                    {item}
-                </NavbarMenu>
-            </Navbar >
+
+                <Navbar className="navbar is-fixed-top">
+                    <NavbarBrand className="navbar-brand" style={{ backgroundColor: '#598254' }}>
+                        {logolink}
+                        <NavbarBurger isColor='white' isActive={this.state.isActive} onClick={this.onClickNav} />
+                    </NavbarBrand>
+                    <NavbarMenu style={{ backgroundColor: '#598254' }} isActive={this.state.isActive}>
+                        <NavbarStart style={{ marginLeft: "auto"}}>
+                            <NavbarItem>
+                                <SearchBox />
+                            </NavbarItem>
+                            <NavbarItem>
+                                <Link to='/products'>
+                                    {<Title isSize={4} style={{ color: 'white' }} className='mainTitle' hasTextAlign='centered'>Products</Title>}
+                                </Link>
+                            </NavbarItem>
+                            <NavbarItem>
+                                {item}
+                            </NavbarItem>
+                        </NavbarStart>
+                    </NavbarMenu>
+                </Navbar>
         )
     }
 }

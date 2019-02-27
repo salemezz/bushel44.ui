@@ -1,28 +1,23 @@
-.navbar-brand {
-    padding: 0px;
-    min-height: 25px;
-}
-.navbar {
-  height: auto;
+.navbar-item img {
+    max-height: 4rem !important;
 }
 
 .logo {
     width: 250px;
     height: auto;
-    margin-top: 5px;
-    margin-left: 25px;
+    margin: auto;
 }
-
+.navbar-burger {
+    color: white !important;
+}
 .title {
-    font-family: 'Cash Currency';
+    font-family: 'Butler_Light';
 }
 
 @media (min-width: 640px) {
     .logo {
         width: 250px;
-        height: auto;
-        margin-top: 10px;
-        margin-left: 25px;
+        height: auto;       
     }
     .navbar-brand {
         margin: 0px;
@@ -32,6 +27,6 @@
 }
 
 @font-face {
-    font-family: 'Cash Currency';
-    src: url('./Cash Currency.ttf')format('truetype');
+    font-family: 'Butler_Light';
+    src: url('./Butler_Light.otf')format('opentype');
 }

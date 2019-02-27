@@ -58,7 +58,7 @@ handleSubmit = (event) => {
     data.append('creatorId', this.state.creatorId);
     data.append('postedBy', this.state.postedBy);
 
-    fetch('https://bushel44.herokuapp.com/api/products', {
+    fetch('https://herballist.herokuapp.com/api/products', {
         method: 'POST',
         body: data,
     }).then(() => {
@@ -106,9 +106,8 @@ render() {
                     <Control onChange={this.handleTypeChange}>
                         <Select>
                             <option>Select Product Type...</option>
-                            <option>Flower (lb) </option>
-                            <option>Oil (pc.)</option>
-                            <option>Editable (pc.)</option>
+                            <option>Dried Loose Leaf/Flower (lb) </option>
+                            <option>Essential oil (pc.)</option>
                         </Select>
                     </Control>
                 </Field>

@@ -31,8 +31,8 @@ class Login extends Component{
         this.setState({...this.state, loading:true})
         authenticate(this.state.username, this.state.password)
         .then(()=>{
-            this.props.history.push('/')
-            // window.location.reload()
+            this.props.history.push('/protected')
+            window.location.reload()
         })
         .catch(err=>{
             this.setState({
@@ -53,7 +53,7 @@ class Login extends Component{
             <Container>
                 <Columns isCentered>
                     <Column isSize={6}>
-                        <Card style={{ backgroundColor: 'rgba(113, 219, 80, .8)', border: ".75px solid black" }}>
+                        <Card style={{ margin: '15px', backgroundColor: '#FCFCFC', border: ".75px solid black" }}>
                             <CardHeader>
                                 <CardHeaderTitle>
                                     Login
@@ -63,7 +63,7 @@ class Login extends Component{
                                 <Field>
                                     <Label>Username</Label>
                                     <Control hasIcons='left'>
-                                        <Input isColor='info' placeholder='Username' onKeyUp={this.handleUsernameChange}/>
+                                        <Input id='username' isColor='info' placeholder='Username' onKeyUp={this.handleUsernameChange}/>
                                         <Icon isSize='small' isAlign='left'>
                                             <FontAwesomeIcon icon={['fas', 'user']}/>
                                         </Icon>
@@ -73,14 +73,14 @@ class Login extends Component{
                                 <Field>
                                     <Label>Password</Label>
                                     <Control hasIcons='left'>
-                                        <Input type='password' isColor='info' placeholder='Password' onKeyUp={this.handlePasswordChange} onKeyPress={this.handleSubmit}/>
+                                        <Input id='password' type='password' isColor='info' placeholder='Password' onKeyUp={this.handlePasswordChange} onKeyPress={this.handleSubmit}/>
                                         <Icon isSize='small' isAlign='left'>
                                             <FontAwesomeIcon icon={['fas', 'key']}/>
                                         </Icon>
                                     </Control>
                                     <Help isHidden={this.state.password!=='' || this.state.clean} isColor='danger'></Help>
                                 </Field>
-                                <Button style={{float:'right'}} isLoading={this.state.loading} disabled={(this.state.username==='' || this.state.password==='')} isColor='black' isOutlined onClick={this.handleSubmit}>Login</Button>
+                                <Button id='login_button' style={{float:'right'}} isLoading={this.state.loading} disabled={(this.state.username==='' || this.state.password==='')} isColor='black' isOutlined onClick={this.handleSubmit}>Login</Button>
                                 <Link to='/register'>Can't Login? Register Here!</Link>
                             </CardContent>
                         </Card>

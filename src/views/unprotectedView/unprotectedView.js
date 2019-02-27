@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import {
-    Notification, Delete, Container, CardContent, 
+    Notification, Delete, Container, CardContent,
     Card, Columns, Column, Label,
     Title, Media, MediaContent, Subtitle
 } from 'bloomer'
 import withRouter from '../../../node_modules/react-router-dom/withRouter';
-import { CloudinaryContext, Transformation, Image } from 'cloudinary-react';
+import { CloudinaryContext, Image } from 'cloudinary-react';
 import $ from 'jquery'
 
 class UnprotectedView extends Component {
@@ -26,16 +26,11 @@ class UnprotectedView extends Component {
 
     myReload = () => {
         const { profileUserID } = this.props.location.state
-        // console.log('l ' + this.props.location.state)
-        console.log('v ' + profileUserID)
         fetch('https://bushel44.herokuapp.com/api/users/' + profileUserID)
             .then(response => response.json())
             .then(data => {
-                console.log('data: ' + JSON.stringify(data));
-                console.log(this.state.userID);                
                 this.setState({
                     ...this.state,
-                    // userPageData: JSON.stringify(data)
                     username: data.username,
                     firstName: data.first_name,
                     lastName: data.last_name,
@@ -80,7 +75,7 @@ class UnprotectedView extends Component {
             })
     };
 
-    componentDidMount() { 
+    componentDidMount() {
         this.myReload()
     }
 
@@ -90,66 +85,56 @@ class UnprotectedView extends Component {
     }
 
     render() {
-            return (
-                <Container>
-                    <Columns isCentered>
-                        <Notification isColor='danger' isHidden={!this.state.notificationVisible}>
-                            {this.state.error}
-                            <Delete onClick={this.hideNotification} />
-                        </Notification>
-                        <Column isSize={6}>    
-                            <Card style={{ backgroundColor: 'rgba(113, 219, 80, .8)', border: ".75px solid black" }}>
-                                <CardContent>                   
-                                    <Title isSize={4}>{this.state.username}</Title>
-                                    <Label>
-                                        <Subtitle isSize={6}><b>Email:</b> {this.state.email} <br/>
-                                            <b>Business:</b> {this.state.businessName} </Subtitle>
-                                    </Label>
-                                </CardContent>
-                            </Card>
-                        </Column>
-
-                    </Columns>
-               
-                    <Columns isCentered>
-                        <Column isSize={6}>
-                        <Title style={{ textAlign: 'center', fontSize: 'calc(8px + 1.5vw)' }}isSize={6}>{this.state.username}'s Products</Title>
-                            <Card style={{ backgroundColor: 'rgba(113, 219, 80, .8)', border: ".75px solid black" }}>
-                                <CardContent>
+        return (
+            <Container>
+                <Columns isCentered>
+                    <Notification isColor='danger' isHidden={!this.state.notificationVisible}>
+                        {this.state.error}
+                        <Delete onClick={this.hideNotification} />
+                    </Notification>
+                    <Column isSize={6}>
+                        <Card style={{ backgroundColor: '#FCFCFC', border: ".75px solid black" }}>
+                            <CardContent>
+                                <Title isSize={4}>{this.state.username}</Title>
+                                <Label>
+                                    <Subtitle isSize={6}><b>Email:</b> {this.state.email} <br />
+                                        <b>Business:</b> {this.state.businessName} </Subtitle>
+                                </Label>
+                            </CardContent>
+                        </Card>
+                    </Column>
+                </Columns>
+                <Columns isCentered>
+                    <Column isSize={6}>
+                        <Title style={{ textAlign: 'center', fontSize: 'calc(8px + 1.5vw)' }} isSize={6}>{this.state.username}'s Products</Title>
+                        <Card style={{ backgroundColor: '#FCFCFC', border: ".75px solid black" }}>
+                            <CardContent>
                                 {this.state.userProducts.map((userProduct) => {
                                     console.log('image ' + userProduct.productName)
                                     return (
                                         <Media>
                                             <MediaContent>
-                                                <CloudinaryContext>
-                                                    <Title style={{ textAlign: 'center', fontSize: 'calc(8px + 2vw)' }}>{`${userProduct.productName}`}</Title>            
+                                                <Title style={{ textAlign: 'center', fontSize: 'calc(8px + 2vw)' }}>{`${userProduct.productName}`}</Title>
+                                                <CloudinaryContext style={{ textAlign: 'center' }}>
                                                     <Image onClick={this.toggleModal} style={{ width: "auto", maxHeight: "auto" }} cloudName="dozenuld4" secure="true" publicId={userProduct.image}>
                                                     </Image>
-                                                    {/* <Modal isActive={this.state.is_active}>
-                                                        <ModalBackground />
-                                                        <ModalContent>
-                                                            <Image style={{ width: "auto", maxHeight: "auto" }} cloudName="dozenuld4" secure="true" publicId={product.image}>
-                                                            </Image>
-                                                        </ModalContent>
-                                                        <ModalClose onClick={this.toggleModal} />
-                                                    </Modal> */}
-                                                    <ul>
-                                                        <li><b>Quantity:</b> {userProduct.stock} </li>
-                                                        <li><b>Type:</b> {userProduct.type} </li>                                      
-                                                        <li><b>Details:</b> {userProduct.details} </li>                                     
-                                                    </ul>
                                                 </CloudinaryContext>
+                                                <ul>
+                                                    <li><b>Quantity:</b> {userProduct.stock} </li>
+                                                    <li><b>Type:</b> {userProduct.type} </li>
+                                                    <li><b>Details:</b> {userProduct.details} </li>
+                                                </ul>
                                             </MediaContent>
                                         </Media>
                                     )
                                 })}
-                                </CardContent>
-                            </Card>
-                        </Column>
+                            </CardContent>
+                        </Card>
+                    </Column>
 
-                    </Columns>
-                </Container>
-            )
+                </Columns>
+            </Container>
+        )
     }
 }
 

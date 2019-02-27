@@ -21,9 +21,9 @@ class EditView extends Component {
     }
 
     componentWillReceiveProps() {
-        console.log('https://bushel44.herokuapp.com/api/products/' + this.props.protectedState.selectedProduct)
+        console.log('https://herballist.herokuapp.com/api/products/' + this.props.protectedState.selectedProduct)
 
-        fetch('https://bushel44.herokuapp.com/api/products/' + this.props.protectedState.selectedProduct)
+        fetch('https://herballist.herokuapp.com/api/products/' + this.props.protectedState.selectedProduct)
             //.then(response => response.json())
             .then(data => {
                 console.log('data: ' + JSON.stringify(data.productName))
@@ -41,7 +41,7 @@ class EditView extends Component {
         this.setState({ ...this.state, photoUploading: true })
         const data = new FormData();
         data.append('image', this.state.selectedFile);
-        fetch('https://bushel44.herokuapp.com/api/products/' + this.props.protectedState.selectedProduct + '/imageUpload', {
+        fetch('https://herballist.herokuapp.com/api/products/' + this.props.protectedState.selectedProduct + '/imageUpload', {
             method: 'PUT',
             body: data,
         })
@@ -64,7 +64,7 @@ class EditView extends Component {
         this.props.loadingTrue()
         $.ajax({
             method: "PUT",
-            url: "https://bushel44.herokuapp.com/api/products/" + this.props.protectedState.selectedProduct,
+            url: "https://herballist.herokuapp.com/api/products/" + this.props.protectedState.selectedProduct,
             data: JSON.stringify({
                 productName: this.state.productName,
                 stock: this.state.stock,
@@ -147,10 +147,9 @@ class EditView extends Component {
                         <Label>Product Type</Label>
                         <Control onChange={this.handleTypeEdit}>
                             <Select>
-                                <option>Select Product Type...</option>
-                                <option>Flower (lb) </option>
-                                <option>Oil (pc.)</option>
-                                <option>Editable (pc.)</option>
+                            <option>Select Product Type...</option>
+                            <option>Dried Loose Leaf/Flower (lb) </option>
+                            <option>Essential oil (pc.)</option>
                             </Select>
                         </Control>
                     </Field>

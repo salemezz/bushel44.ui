@@ -1,7 +1,4 @@
-section.has-background-info {
-    background-color: white  !important;
-    background-repeat: no-repeat;
-    background-size: cover;
-    padding-top: 24px;
+section.has-navbar-fixed-top {
+    padding-top: 130px;
 }
 

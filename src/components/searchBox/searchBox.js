@@ -37,16 +37,15 @@ class SearchBox extends Component {
     return (
       <NavbarEnd>
         <NavbarItem>
-          {/* <Container> */}
             <Field id='searchBox'>
               <Control>
                 <Field hasAddons>
                   <Control id='searchBox'>
-                    <Input id='searchText' isColor='black' placeholder='Search Products' onKeyUp={this.handleChange} onKeyPress={this.handleSubmit} />
+                    <Input id='searchText' isColor='#9CCB66' placeholder='Search Products' onKeyUp={this.handleChange} onKeyPress={this.handleSubmit} />
                   </Control>
                   <Control>
-                    <Button isColor='black' isOutlined>
-                      <Link style={{ color: 'black' }} to={{
+                    <Button style={{backgroundColor: '#9CCB66'}}>
+                      <Link style={{ color: '#598254' }} to={{
                         pathname: '/search',
                         search: '?searchTerm=' + this.state.value
                       }}> Search</Link>
