@@ -26,7 +26,7 @@ class UnprotectedView extends Component {
 
     myReload = () => {
         const { profileUserID } = this.props.location.state
-        fetch('https://bushel44.herokuapp.com/api/users/' + profileUserID)
+        fetch('https://herballist-api.herokuapp.com/api/users/' + profileUserID)
             .then(response => response.json())
             .then(data => {
                 this.setState({
@@ -49,7 +49,7 @@ class UnprotectedView extends Component {
 
         $.ajax({
             method: "POST",
-            url: "https://bushel44.herokuapp.com/api/myProducts",
+            url: "https://herballist-api.herokuapp.com/api/myProducts",
             data:
                 JSON.stringify({
                     thisUser: profileUserID

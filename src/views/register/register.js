@@ -50,7 +50,7 @@ class Login extends Component{
         this.setState({...this.state, loading:true})
         $.ajax({
             method: "POST",
-            url: "https://bushel44.herokuapp.com/auth/register",
+            url: "https://herballist-api.herokuapp.com/auth/register",
             data:
             JSON.stringify({
                 username:this.state.username,

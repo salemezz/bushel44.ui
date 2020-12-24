@@ -29,7 +29,7 @@ class Search extends Component {
 
         $.ajax({
             method: "POST",
-            url: "https://bushel44.herokuapp.com/api/search",
+            url: "https://herballist-api.herokuapp.com/api/search",
             data:
                 JSON.stringify({
                     searchTerm: this.state.searchTerm,

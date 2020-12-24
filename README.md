@@ -1,2 +1,2 @@
-# bushel44.ui
+# herballist.ui
 # Trigger build

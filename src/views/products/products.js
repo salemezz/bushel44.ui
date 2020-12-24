@@ -27,7 +27,7 @@ export default class Products extends Component {
     myReload = () => {
         console.log('loading ' + this.state.loading)
         this.setState({ ...this.state, loading: true })
-        fetch('https://herballist.herokuapp.com/api/products')
+        fetch('https://herballist-api.herokuapp.com/api/products')
             .then(response => response.json())
             .then(data => {
                 console.log('data: ' + data);

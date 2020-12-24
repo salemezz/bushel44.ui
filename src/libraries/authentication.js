@@ -18,7 +18,7 @@ export function getUserData(){
 export function deauthenticate(){
     return new Promise((resolve, reject)=>{
         window.localStorage.removeItem('user')
-        fetch(`https://bushel44.herokuapp.com/auth/logout`)
+        fetch(`https://herballist-api.herokuapp.com/auth/logout`)
         .then(response=>{
             if(response.ok){
                 resolve(true)
@@ -36,7 +36,7 @@ export function deauthenticate(){
 export function authenticate(username, password){
     return new Promise((resolve, reject)=>{
         window.localStorage.removeItem('user')
-        fetch(`https://bushel44.herokuapp.com/auth/login`,{
+        fetch(`https://herballist-api.herokuapp.com/auth/login`,{
             method:'POST',
             headers: {
                 "Content-Type": "application/json; charset=utf-8"

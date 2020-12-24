@@ -58,7 +58,7 @@ handleSubmit = (event) => {
     data.append('creatorId', this.state.creatorId);
     data.append('postedBy', this.state.postedBy);
 
-    fetch('https://herballist.herokuapp.com/api/products', {
+    fetch('https://herballist-api.herokuapp.com/api/products', {
         method: 'POST',
         body: data,
     }).then(() => {

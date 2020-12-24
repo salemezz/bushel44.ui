@@ -40,7 +40,7 @@ class ProtectedView extends Component {
         this.setState({ ...this.state, loading: true })
         $.ajax({
             method: "POST",
-            url: "https://herballist.herokuapp.com/api/myProducts",
+            url: "https://herballist-api.herokuapp.com/api/myProducts",
             data:
                 JSON.stringify({
                     thisUser: this.state.thisUser
@@ -93,7 +93,7 @@ class ProtectedView extends Component {
         this.setState({ ...this.state, loading: true })
         $.ajax({
             method: "DELETE",
-            url: "https://herballist.herokuapp.com/api/products/" + JSON.stringify(myProduct.id)
+            url: "https://herballist-api.herokuapp.com/api/products/" + JSON.stringify(myProduct.id)
         })
             .catch(() => {
                 this.setState({ ...this.state, loading: false })
