@@ -32,6 +32,5 @@
         "test": "react-scripts test --env=jsdom",
         "eject": "react-scripts eject"
     },
-    "license": "MIT",
-    "proxy": "https://herballist-api.herokuapp.com/"
+    "license": "MIT"
 }
